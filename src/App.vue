@@ -1,28 +1,116 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="app-content">
+      <router-view />
+    </div>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
-
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
-</script>
-
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  html {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 10px;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    background-color: #394247;
+    margin: 0;
+    padding: 0;
+  }
+
+  #app {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+  }
+
+  .app-content {
+    background-color: #1b1c1d;
+    height: 100%;
+    max-height: 812px;
+    max-width: 375px;
+    position: relative;
+    width: 100%;
+  }
+
+  @media (min-width: 400px) {
+    .app-content {
+      height: calc(100% - 60px);
+      margin: 30px;
+      width: calc(100% - 60px);
+    }
+  }
+
+  .g_page {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+  }
+
+  .g_page-body {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    overflow: auto;
+    width: 100%;
+  }
+
+  .g_page-header {
+    background-color: #262c30;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 50%;
+    justify-content: flex-end;
+    padding: 20px;
+  }
+
+  .g_page-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+    position: relative;
+  }
+
+  .g_page-header-title {
+    color: #ffffff;
+    font-size: 2.8rem;
+    margin: 0;
+  }
+
+  .g_back-btn {
+    align-items: center;
+    background-color: #394248;
+    border-radius: 50%;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+  }
+
+  .g_back-btn svg {
+    fill: #7a8c98;
+  }
+
+  .g_message {
+    align-items: center;
+    color: #ffffff;
+    display: flex;
+    flex-grow: 1;
+    font-size: 1.4rem;
+    justify-content: center;
+    margin: 0;
+  }
 </style>
