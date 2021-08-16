@@ -5,24 +5,34 @@
         <h2 class="g_page-header-title">Tasks</h2>
       </div>
       <div class="g_page-content">
-        <span v-if="tasks === undefined" class="g_message">Loading...</span>
-        <span v-else-if="tasks.length === 0" class="g_message">No Tasks</span>
+        <span v-if="items === undefined" class="g_message">Loading...</span>
+        <span v-else-if="items.length === 0" class="g_message">No Tasks</span>
         <ul v-else class="list">
-          <li v-for="task of tasks" :key="task.id" class="list-item">
-            <router-link :to="`/${task.id}`">{{ task.title }}</router-link>
-            <router-link :to="`/${task.id}/update`">
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4.41999 20.579C4.13948 20.5785 3.87206 20.4602 3.68299 20.253C3.49044 20.0475 3.39476 19.7695 3.41999 19.489L3.66499 16.795L14.983 5.481L18.52 9.017L7.20499 20.33L4.51099 20.575C4.47999 20.578 4.44899 20.579 4.41999 20.579ZM19.226 8.31L15.69 4.774L17.811 2.653C17.9986 2.46522 18.2531 2.35971 18.5185 2.35971C18.7839 2.35971 19.0384 2.46522 19.226 2.653L21.347 4.774C21.5348 4.96157 21.6403 5.21609 21.6403 5.4815C21.6403 5.74691 21.5348 6.00143 21.347 6.189L19.227 8.309L19.226 8.31Z"
-                />
-              </svg>
-            </router-link>
+          <li v-for="item of items" :key="item.id">
+            <span v-if="item.type === 'section-header'" class="section-header">
+              {{ item.label }}
+            </span>
+            <span v-else class="list-item">
+              <router-link class="list-item-text" :to="`/${item.id}`">
+                <span class="list-item-title">{{ item.title }}</span>
+                <span class="list-item-due" v-if="item.dueDate">{{
+                  formatDueDate(item.dueDate)
+                }}</span>
+              </router-link>
+              <router-link :to="`/${item.id}/update`">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.41999 20.579C4.13948 20.5785 3.87206 20.4602 3.68299 20.253C3.49044 20.0475 3.39476 19.7695 3.41999 19.489L3.66499 16.795L14.983 5.481L18.52 9.017L7.20499 20.33L4.51099 20.575C4.47999 20.578 4.44899 20.579 4.41999 20.579ZM19.226 8.31L15.69 4.774L17.811 2.653C17.9986 2.46522 18.2531 2.35971 18.5185 2.35971C18.7839 2.35971 19.0384 2.46522 19.226 2.653L21.347 4.774C21.5348 4.96157 21.6403 5.21609 21.6403 5.4815C21.6403 5.74691 21.5348 6.00143 21.347 6.189L19.227 8.309L19.226 8.31Z"
+                  />
+                </svg>
+              </router-link>
+            </span>
           </li>
         </ul>
       </div>
@@ -45,6 +55,7 @@
 
 <script>
   import api from '../api';
+  import { formatFull, formatRelative, getStartOfDay } from '../utils/dates';
   import TaskBar from '../components/TaskBar.vue';
 
   export default {
@@ -52,11 +63,58 @@
     components: { TaskBar },
     data() {
       return {
-        tasks: undefined,
+        items: undefined,
       };
     },
+    methods: {
+      formatDueDate(date) {
+        return formatFull(date);
+      },
+    },
     async mounted() {
-      this.tasks = await api.tasks.getAll();
+      const tasks = await api.tasks.getAll();
+      let items = [];
+      const daysLookup = {};
+      const noDueDate = [];
+      tasks.forEach((task) => {
+        if (task.dueDate) {
+          const startOfDay = getStartOfDay(task.dueDate);
+
+          if (daysLookup[startOfDay] === undefined) {
+            daysLookup[startOfDay] = [];
+          }
+          daysLookup[startOfDay].push(task);
+        } else {
+          noDueDate.push(task);
+        }
+      });
+
+      // convert lookup to array and sort
+      const days = Object.entries(daysLookup).sort(([keyA], [keyB]) => {
+        return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
+      });
+
+      for (const [day, tasks] of days) {
+        items.push({
+          label: formatRelative(day),
+          type: 'section-header',
+        });
+        tasks.sort(function(a, b) {
+          return a.dueDate < b.dueDate ? -1 : a.dueDate > b.dueDate ? 1 : 0;
+        });
+        items.push(...tasks);
+      }
+
+      if (noDueDate.length > 0) {
+        items.push({
+          label: 'No Due Date',
+          type: 'section-header',
+        });
+        items.push(...noDueDate);
+      }
+
+      this.items = items;
+      console.log(items);
     },
   };
 </script>
@@ -69,6 +127,7 @@
   }
 
   .list-item {
+    align-items: center;
     background-color: #262c30;
     border-radius: 10px;
     display: flex;
@@ -77,11 +136,14 @@
     width: 100%;
   }
 
-  .list-item a {
-    align-items: center;
-    color: #ffffff;
+  .list-item-text {
     display: flex;
-    font-size: 1.4rem;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .list-item a {
+    display: flex;
     padding: 20px;
     text-decoration: none;
   }
@@ -90,8 +152,27 @@
     flex-grow: 1;
   }
 
+  .list-item-title {
+    color: #ffffff;
+    font-size: 1.4rem;
+    margin: 0 0 4px;
+  }
+
+  .list-item-due {
+    color: #bec7ce;
+    font-size: 1.3rem;
+  }
+
   .list-item svg {
     fill: #697984;
+  }
+
+  .section-header {
+    color: #a5aaaf;
+    display: block;
+    font-size: 1.3rem;
+    margin: 0 0 8px;
+    width: 100%;
   }
 
   .add-btn {

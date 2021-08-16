@@ -68,6 +68,14 @@
 
   .g_page-header {
     background-color: #262c30;
+    background-size: 10px 10px;
+    background-image: repeating-linear-gradient(
+      45deg,
+      #323a40 0,
+      #323a40 1px,
+      #262c30 0,
+      #262c30 50%
+    );
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -87,6 +95,7 @@
   .g_page-header-title {
     color: #ffffff;
     font-size: 2.8rem;
+    line-height: 2.2rem;
     margin: 0;
   }
 

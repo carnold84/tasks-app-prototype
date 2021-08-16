@@ -1,32 +1,6 @@
 import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
 
-/* const state = {
-  tasks: [
-    {
-      created: '2021-08-10T05:26:09.925Z',
-      id: '1',
-      notes: 'This is task number 1',
-      title: 'Task 1',
-      updated: '2021-08-10T05:26:52.410Z',
-    },
-    {
-      created: '2021-08-10T05:26:09.925Z',
-      id: '2',
-      notes: 'This is task number 2',
-      title: 'Task 2',
-      updated: '2021-08-10T05:26:52.410Z',
-    },
-    {
-      created: '2021-08-10T05:26:09.925Z',
-      id: '3',
-      notes: 'This is task number 3',
-      title: 'Task 4',
-      updated: '2021-08-10T05:26:52.410Z',
-    }
-  ]
-}; */
-
 const getState = async () => {
   const response = await localStorage.getItem('task_app');
 
@@ -42,13 +16,9 @@ const api = {
     create: async (data) => {
       const nextTask = {
         ...data,
-        created: DateTime.now()
-          .toUTC()
-          .toString(),
+        created: DateTime.now().toString(),
         id: uuidv4(),
-        updated: DateTime.now()
-          .toUTC()
-          .toString(),
+        updated: DateTime.now().toString(),
       };
 
       const state = await getState();
@@ -91,9 +61,7 @@ const api = {
           updatedTask = {
             ...task,
             ...data,
-            updated: DateTime.now()
-              .toUTC()
-              .toString(),
+            updated: DateTime.now().toString(),
           };
           return updatedTask;
         }

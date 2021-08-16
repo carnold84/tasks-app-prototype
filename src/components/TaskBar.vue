@@ -21,6 +21,7 @@
 <style scoped>
   .c_task-bar {
     background-color: #262c30;
+    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
     display: flex;
     flex-shrink: 0;
     height: 70px;
