@@ -9,17 +9,17 @@
       <div class="g_page-content">
         <text-field
           v-model="title"
-          @blur="onBlur"
-          :error="error"
+          :isRequired="true"
           label="Title"
           style="margin: 0 0 15px;"
         />
         <text-field
           v-model="notes"
           label="Notes"
-          style="height: 150px;"
+          style="height: 150px; margin: 0 0 15px;"
           type="textArea"
         />
+        <date-time-picker v-model="dueDate" label="Due Date" />
       </div>
     </div>
     <task-bar>
@@ -38,7 +38,7 @@
           </svg>
         </router-link>
       </template>
-      <button class="add-btn" :disabled="error !== null" @click="onAdd">
+      <button class="add-btn" :disabled="title === ''" @click="onAdd">
         <svg
           width="24"
           height="24"
@@ -58,18 +58,18 @@
 
 <script>
   import api from '../api';
+  import DateTimePicker from '../components/DateTimePicker.vue';
   import TaskBar from '../components/TaskBar.vue';
   import TextField from '../components/TextField.vue';
 
   export default {
     name: 'AddTask',
-    components: { TaskBar, TextField },
+    components: { DateTimePicker, TaskBar, TextField },
     data() {
       return {
-        error: null,
-        notes: this.task?.notes ?? '',
-        title: this.task?.title ?? '',
-        touched: [],
+        dueDate: undefined,
+        notes: '',
+        title: '',
       };
     },
     computed: {
@@ -85,13 +85,17 @@
         if (this.id) {
           const task = await api.tasks.getById(this.id);
 
+          this.dueDate = task.dueDate;
           this.notes = task.notes;
           this.title = task.title;
+
+          this.validate();
         }
       },
       async onAdd() {
-        if (!this.error) {
+        if (this.title !== '') {
           const task = {
+            dueDate: this.dueDate,
             notes: this.notes,
             title: this.title,
           };
@@ -101,19 +105,6 @@
             await api.tasks.create(task);
           }
           this.$router.go(-1);
-        }
-      },
-      onBlur() {
-        if (!this.touched.includes('title')) {
-          this.touched.push('title');
-        }
-
-        if (this.touched.includes('title')) {
-          if (this.title === '') {
-            this.error = 'Title is required';
-          } else {
-            this.error = null;
-          }
         }
       },
     },

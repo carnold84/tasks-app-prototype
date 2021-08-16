@@ -6,6 +6,8 @@
       </div>
       <div class="g_page-content">
         <p class="notes">{{ notes }}</p>
+        <p v-if="dueDate" class="due-date">{{ dueDate }}</p>
+        <p v-if="fullDueDate" class="full-due-date">{{ fullDueDate }}</p>
       </div>
     </div>
     <task-bar>
@@ -24,8 +26,22 @@
           </svg>
         </router-link>
       </template>
-      <template v-slot:right-content>
-        <button @click="deleteTask" class="delete-btn">
+      <template v-if="task" v-slot:right-content>
+        <router-link :to="`/${task.id}/update`" class="action-btn"
+          >>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4.41999 20.579C4.13948 20.5785 3.87206 20.4602 3.68299 20.253C3.49044 20.0475 3.39476 19.7695 3.41999 19.489L3.66499 16.795L14.983 5.481L18.52 9.017L7.20499 20.33L4.51099 20.575C4.47999 20.578 4.44899 20.579 4.41999 20.579ZM19.226 8.31L15.69 4.774L17.811 2.653C17.9986 2.46522 18.2531 2.35971 18.5185 2.35971C18.7839 2.35971 19.0384 2.46522 19.226 2.653L21.347 4.774C21.5348 4.96157 21.6403 5.21609 21.6403 5.4815C21.6403 5.74691 21.5348 6.00143 21.347 6.189L19.227 8.309L19.226 8.31Z"
+            />
+          </svg>
+        </router-link>
+        <button @click="deleteTask" class="action-btn">
           <svg
             width="24"
             height="24"
@@ -44,6 +60,7 @@
 </template>
 
 <script>
+  import { DateTime } from 'luxon';
   import api from '../api';
   import TaskBar from '../components/TaskBar.vue';
 
@@ -52,13 +69,36 @@
     components: { TaskBar },
     data() {
       return {
-        notes: this.task?.notes ?? '',
-        title: this.task?.title ?? '',
+        task: undefined,
       };
     },
     computed: {
+      dueDate() {
+        if (this.task?.dueDate) {
+          const date = DateTime.fromISO(
+            this.task?.dueDate
+          ).toRelativeCalendar();
+          const time = DateTime.fromISO(this.task?.dueDate).toFormat('h:mm a');
+          return `Due ${date} at ${time}`;
+        }
+
+        return null;
+      },
+      fullDueDate() {
+        if (this.task?.dueDate) {
+          return DateTime.fromISO(this.task?.dueDate).toFormat('ff');
+        }
+
+        return null;
+      },
       id() {
         return this.$route?.params?.id;
+      },
+      notes() {
+        return this.task?.notes ? this.task.notes : 'No notes';
+      },
+      title() {
+        return this.task?.title ?? '';
       },
     },
     mounted() {
@@ -68,9 +108,7 @@
       async getTask() {
         if (this.id) {
           const task = await api.tasks.getById(this.id);
-
-          this.notes = task.notes;
-          this.title = task.title;
+          this.task = task;
         }
       },
       async deleteTask() {
@@ -93,10 +131,22 @@
   .notes {
     color: #c1c9d0;
     font-size: 1.4rem;
+    margin: 0 0 10px;
+  }
+
+  .due-date {
+    color: #c1c9d0;
+    font-size: 1.4rem;
+    margin: 0 0 2px;
+  }
+
+  .full-due-date {
+    color: #acb3b9;
+    font-size: 1.3rem;
     margin: 0;
   }
 
-  .delete-btn {
+  .action-btn {
     align-items: center;
     background-color: transparent;
     border: none;
@@ -108,7 +158,7 @@
     width: 40px;
   }
 
-  .delete-btn svg {
+  .action-btn svg {
     fill: #5a676f;
   }
 </style>

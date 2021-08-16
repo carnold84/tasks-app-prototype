@@ -1,8 +1,19 @@
 <template>
   <div class="c_text-field">
     <label v-if="label">{{ label }}</label>
-    <textarea v-if="type === 'textArea'" v-model="inputVal" />
-    <input v-else v-model="inputVal" @blur="$emit('blur')" :type="type" />
+    <textarea
+      v-if="type === 'textArea'"
+      v-model="inputVal"
+      @blur="onBlur"
+      @focus="onFocus"
+    />
+    <input
+      v-else
+      v-model="inputVal"
+      @blur="onBlur"
+      @focus="onFocus"
+      :type="type"
+    />
     <span v-if="error" class="error">
       {{ error }}
     </span>
@@ -12,16 +23,61 @@
 <script>
   export default {
     name: 'TextField',
+    data() {
+      return {
+        error: null,
+        touched: false,
+      };
+    },
     props: {
-      error: String,
+      isRequired: {
+        default() {
+          return false;
+        },
+        type: Boolean,
+      },
       label: String,
       type: {
-        default: 'text',
+        default() {
+          return 'text';
+        },
         type: String,
       },
       value: {
-        default: '',
+        default() {
+          return '';
+        },
         type: String,
+      },
+    },
+    methods: {
+      onBlur() {
+        this.validate();
+
+        this.$emit('blur');
+      },
+      onFocus() {
+        if (!this.touched) {
+          this.touched = true;
+        }
+
+        this.$emit('focus');
+      },
+      validate() {
+        let isValid = true;
+
+        if (this.touched) {
+          if (this.isRequired && this.inputVal === '') {
+            this.error = this.label
+              ? `${this.label} is required`
+              : 'Field is required';
+            isValid = false;
+          } else {
+            this.error = null;
+          }
+        }
+
+        this.isValid = isValid;
       },
     },
     computed: {
@@ -32,6 +88,12 @@
         set(val) {
           this.$emit('input', val);
         },
+      },
+    },
+    watch: {
+      value() {
+        // validate input when passed into to check if it's blank
+        this.validate();
       },
     },
   };

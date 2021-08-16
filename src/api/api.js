@@ -1,4 +1,4 @@
-import { formatISO } from 'date-fns';
+import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
 
 /* const state = {
@@ -42,9 +42,13 @@ const api = {
     create: async (data) => {
       const nextTask = {
         ...data,
-        created: formatISO(new Date()),
+        created: DateTime.now()
+          .toUTC()
+          .toString(),
         id: uuidv4(),
-        updated: formatISO(new Date()),
+        updated: DateTime.now()
+          .toUTC()
+          .toString(),
       };
 
       const state = await getState();
@@ -87,7 +91,9 @@ const api = {
           updatedTask = {
             ...task,
             ...data,
-            updated: formatISO(new Date()),
+            updated: DateTime.now()
+              .toUTC()
+              .toString(),
           };
           return updatedTask;
         }
