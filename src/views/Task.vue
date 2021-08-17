@@ -90,6 +90,7 @@
   import { DateTime } from 'luxon';
   import api from '../api';
   import TaskBar from '../components/TaskBar.vue';
+  import { formatTime } from '../utils/dates';
 
   export default {
     name: 'Task',
@@ -105,7 +106,8 @@
           const date = DateTime.fromISO(
             this.task?.dueDate
           ).toRelativeCalendar();
-          const time = DateTime.fromISO(this.task?.dueDate).toFormat('h:mm a');
+
+          const time = formatTime(this.task?.dueDate);
           return `Due ${date} at ${time}`;
         }
 
@@ -185,7 +187,7 @@
   .due-date {
     color: #c1c9d0;
     font-size: 1.6rem;
-    margin: 0 0 2px;
+    margin: 0 0 6px;
   }
 
   .full-due-date {

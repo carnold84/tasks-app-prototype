@@ -12,13 +12,17 @@ export const getStartOfDay = (date) => {
   return datetime.startOf('day').toString();
 };
 
+export const formatTime = (date) => {
+  const datetime = DateTime.fromISO(date);
+
+  return datetime.toFormat('HH:mm');
+};
+
 export const formatFull = (date, withTime = true) => {
   const datetime = DateTime.fromISO(date);
 
   if (withTime) {
-    return `${datetime.toFormat('ccc, d LLL yyyy')}, ${datetime.toFormat(
-      'HH:mm'
-    )}`;
+    return `${datetime.toFormat('ccc, d LLL yyyy')}, ${formatTime(date)}`;
   }
 
   return DateTime.fromISO(date).toFormat('cccc d LLLL yy');
