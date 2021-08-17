@@ -56,7 +56,7 @@
 
   .c_list-item a {
     display: flex;
-    padding: 20px;
+    padding: 15px;
     text-decoration: none;
   }
 

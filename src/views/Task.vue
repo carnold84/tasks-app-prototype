@@ -90,7 +90,7 @@
   import { DateTime } from 'luxon';
   import api from '../api';
   import TaskBar from '../components/TaskBar.vue';
-  import { formatTime } from '../utils/dates';
+  import { formatFull, formatTime } from '../utils/dates';
 
   export default {
     name: 'Task',
@@ -115,7 +115,7 @@
       },
       fullDueDate() {
         if (this.task?.dueDate) {
-          return DateTime.fromISO(this.task?.dueDate).toFormat('ff');
+          return formatFull(this.task?.dueDate);
         }
 
         return null;

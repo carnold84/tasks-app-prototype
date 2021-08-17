@@ -35,18 +35,21 @@
 
   .app-content {
     background-color: #1b1c1d;
-    height: 100%;
+    height: calc(100% - 60px);
+    margin: 30px;
     max-height: 812px;
     max-width: 375px;
     position: relative;
-    width: 100%;
+    width: calc(100% - 60px);
   }
 
-  @media (min-width: 400px) {
+  @media (max-width: 440px) and (hover: none) {
     .app-content {
-      height: calc(100% - 60px);
-      margin: 30px;
-      width: calc(100% - 60px);
+      height: 100%;
+      margin: 0;
+      max-height: none;
+      max-width: none;
+      width: 100%;
     }
   }
 
