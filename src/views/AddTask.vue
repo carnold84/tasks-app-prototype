@@ -24,7 +24,7 @@
     </div>
     <task-bar>
       <template v-slot:left-content>
-        <router-link class="g_back-btn" to="/">
+        <button class="g_back-btn" @click="onBack">
           <svg
             width="20"
             height="20"
@@ -36,7 +36,7 @@
               d="M15.535 3.515L7.04999 12L15.535 20.485L16.95 19.071L9.87799 12L16.95 4.929L15.535 3.515Z"
             />
           </svg>
-        </router-link>
+        </button>
       </template>
       <button class="add-btn" :disabled="title === ''" @click="onAdd">
         <svg
@@ -88,8 +88,6 @@
           this.dueDate = task.dueDate;
           this.notes = task.notes;
           this.title = task.title;
-
-          this.validate();
         }
       },
       async onAdd() {
@@ -106,6 +104,9 @@
           }
           this.$router.go(-1);
         }
+      },
+      onBack() {
+        this.$router.go(-1);
       },
     },
   };

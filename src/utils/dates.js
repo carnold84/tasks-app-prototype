@@ -16,12 +16,16 @@ export const formatFull = (date, withTime = true) => {
   const datetime = DateTime.fromISO(date);
 
   if (withTime) {
-    return `${datetime.toFormat('h:mm a')} on ${datetime.toFormat(
-      'cccc d LLLL yy'
+    return `${datetime.toFormat('ccc, d LLL yyyy')}, ${datetime.toFormat(
+      'HH:mm'
     )}`;
   }
 
   return DateTime.fromISO(date).toFormat('cccc d LLLL yy');
+};
+
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 export const formatRelative = (date) => {
@@ -34,16 +38,16 @@ export const formatRelative = (date) => {
 
   let formattedDate;
 
-  if (days <= 3) {
-    formattedDate = `Due ${targetDate.toRelativeCalendar()}`;
+  if (days <= 1) {
+    formattedDate = capitalizeFirstLetter(targetDate.toRelativeCalendar());
   }
 
-  if (days > 3 && days <= 7) {
+  if (days > 1 && days <= 7) {
     formattedDate = `${targetDate.toFormat('cccc')}`;
   }
 
   if (days > 7) {
-    formattedDate = `${targetDate.toFormat('ff')}`;
+    formattedDate = formatFull(date, false);
   }
 
   return formattedDate;

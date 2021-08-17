@@ -102,6 +102,7 @@
   .g_back-btn {
     align-items: center;
     background-color: #394248;
+    border: none;
     border-radius: 50%;
     display: flex;
     height: 40px;

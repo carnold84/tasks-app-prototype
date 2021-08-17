@@ -5,9 +5,37 @@
         <h2 class="g_page-header-title">{{ title }}</h2>
       </div>
       <div class="g_page-content">
-        <p class="notes">{{ notes }}</p>
-        <p v-if="dueDate" class="due-date">{{ dueDate }}</p>
-        <p v-if="fullDueDate" class="full-due-date">{{ fullDueDate }}</p>
+        <div class="section">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 19H3V17H15V19ZM21 15H3V13H21V15ZM15 11H3V9H15V11ZM21 7H3V5H21V7Z"
+            />
+          </svg>
+          <p class="notes">{{ notes }}</p>
+        </div>
+        <div class="section">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4H7V2H9V4H15V2H17V4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22ZM5 10V20H19V10H5ZM5 6V8H19V6H5ZM11 18.414L7.293 14.707L8.707 13.293L11 15.586L15.293 11.293L16.707 12.707L11 18.413V18.414Z"
+            />
+          </svg>
+          <div class="date-text">
+            <p class="due-date">{{ dueDate || 'No Due Date' }}</p>
+            <p v-if="fullDueDate" class="full-due-date">{{ fullDueDate }}</p>
+          </div>
+        </div>
       </div>
     </div>
     <task-bar>
@@ -27,8 +55,7 @@
         </router-link>
       </template>
       <template v-if="task" v-slot:right-content>
-        <router-link :to="`/${task.id}/update`" class="action-btn"
-          >>
+        <router-link :to="`/${task.id}/update`" class="action-btn">
           <svg
             width="24"
             height="24"
@@ -128,21 +155,42 @@
     font-size: 2.6rem;
   }
 
+  .section {
+    align-items: center;
+    display: flex;
+    margin: 0 0 10px;
+  }
+
+  .section svg {
+    fill: #989da2;
+    height: 20px;
+    margin: 0 10px 0 0;
+    width: 20px;
+  }
+
   .notes {
     color: #c1c9d0;
-    font-size: 1.4rem;
-    margin: 0 0 10px;
+    font-size: 1.6rem;
+  }
+
+  .date-icon {
+    color: #c1c9d0;
+  }
+
+  .date-text {
+    display: flex;
+    flex-direction: column;
   }
 
   .due-date {
     color: #c1c9d0;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin: 0 0 2px;
   }
 
   .full-due-date {
     color: #acb3b9;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     margin: 0;
   }
 
