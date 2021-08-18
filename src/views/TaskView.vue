@@ -1,5 +1,5 @@
 <template>
-  <div class="g_page">
+  <div class="g_stack">
     <div class="g_page-body">
       <div class="g_page-header">
         <h2 class="g_page-header-title">{{ title }}</h2>
@@ -93,7 +93,7 @@
   import { formatFull, formatTime } from '../utils/dates';
 
   export default {
-    name: 'Task',
+    name: 'ViewTask',
     components: { TaskBar },
     data() {
       return {
@@ -191,7 +191,7 @@
   }
 
   .full-due-date {
-    color: #acb3b9;
+    color: #90969a;
     font-size: 1.5rem;
     margin: 0;
   }

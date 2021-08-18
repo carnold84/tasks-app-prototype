@@ -45,11 +45,38 @@ body {
 }
 
 .g_page {
+  background-color: #1b1c1d;
   display: flex;
   height: 100%;
   flex-direction: column;
   position: absolute;
+  transition: transform 400ms ease-in-out;
   width: 100%;
+}
+
+.g_page.is-disabled {
+  overflow: hidden;
+  pointer-events: none;
+  transform: scale(0.9) translateY(-20px);
+}
+
+.g_stack {
+  background-color: #1b1c1d;
+  display: flex;
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
+  height: calc(100% - 25px);
+  flex-direction: column;
+  position: absolute;
+  top: 25px;
+  width: 100%;
+}
+
+.over-enter-active,
+.over-leave-active {
+  transition: transform 400ms ease-in-out;
+}
+.over-enter, .over-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  transform: translateY(calc(100% + 20px));
 }
 
 .g_page-body {

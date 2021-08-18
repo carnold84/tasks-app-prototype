@@ -1,5 +1,5 @@
 <template>
-  <div class="g_page">
+  <div :class="[{ 'is-disabled': isDisabled }, 'g_page']">
     <div class="g_page-body">
       <div class="g_page-header">
         <h2 class="g_page-header-title">Tasks</h2>
@@ -50,8 +50,13 @@
   import ListItem from '../components/ListItem.vue';
 
   export default {
-    name: 'Home',
+    name: 'HomeView',
     components: { ListItem, TaskBar },
+    props: {
+      isDisabled: {
+        type: Boolean,
+      },
+    },
     data() {
       return {
         items: undefined,
@@ -63,54 +68,64 @@
           return formatFull(date);
         }
       },
+      async loadTasks() {
+        const tasks = await api.tasks.getAll();
+        let items = [];
+        const daysLookup = {};
+        const noDueDate = [];
+
+        // group by day
+        tasks.forEach((task) => {
+          if (task.dueDate) {
+            const startOfDay = getStartOfDay(task.dueDate);
+
+            if (daysLookup[startOfDay] === undefined) {
+              daysLookup[startOfDay] = [];
+            }
+            daysLookup[startOfDay].push(task);
+          } else {
+            noDueDate.push(task);
+          }
+        });
+
+        // convert lookup to array and sort by key (day)
+        const days = Object.entries(daysLookup).sort(([keyA], [keyB]) => {
+          return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
+        });
+
+        // add tasks to items array with section headers
+        for (const [day, tasks] of days) {
+          items.push({
+            label: formatRelative(day),
+            type: 'section-header',
+          });
+          tasks.sort(function(a, b) {
+            return a.dueDate < b.dueDate ? -1 : a.dueDate > b.dueDate ? 1 : 0;
+          });
+          items.push(...tasks);
+        }
+
+        // add section for no due date
+        if (noDueDate.length > 0) {
+          items.push({
+            label: 'No Due Date',
+            type: 'section-header',
+          });
+          items.push(...noDueDate);
+        }
+
+        this.items = items;
+      },
     },
     async mounted() {
-      const tasks = await api.tasks.getAll();
-      let items = [];
-      const daysLookup = {};
-      const noDueDate = [];
-
-      // group by day
-      tasks.forEach((task) => {
-        if (task.dueDate) {
-          const startOfDay = getStartOfDay(task.dueDate);
-
-          if (daysLookup[startOfDay] === undefined) {
-            daysLookup[startOfDay] = [];
-          }
-          daysLookup[startOfDay].push(task);
-        } else {
-          noDueDate.push(task);
+      this.loadTasks();
+    },
+    watch: {
+      isDisabled(value) {
+        if (value === false) {
+          this.loadTasks();
         }
-      });
-
-      // convert lookup to array and sort by key (day)
-      const days = Object.entries(daysLookup).sort(([keyA], [keyB]) => {
-        return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
-      });
-
-      // add tasks to items array with section headers
-      for (const [day, tasks] of days) {
-        items.push({
-          label: formatRelative(day),
-          type: 'section-header',
-        });
-        tasks.sort(function(a, b) {
-          return a.dueDate < b.dueDate ? -1 : a.dueDate > b.dueDate ? 1 : 0;
-        });
-        items.push(...tasks);
-      }
-
-      // add section for no due date
-      if (noDueDate.length > 0) {
-        items.push({
-          label: 'No Due Date',
-          type: 'section-header',
-        });
-        items.push(...noDueDate);
-      }
-
-      this.items = items;
+      },
     },
   };
 </script>

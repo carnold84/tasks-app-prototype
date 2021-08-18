@@ -1,31 +1,29 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import AddTask from '../views/AddTask.vue';
-import Home from '../views/Home.vue';
-import Task from '../views/Task.vue';
+import MainView from '../views/MainView.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    name: 'MainView',
+    component: MainView,
   },
   {
     path: '/add-task',
-    name: 'AddTask',
-    component: AddTask,
+    name: 'AddTaskView',
+    component: MainView,
   },
   {
     path: '/:id',
-    name: 'Task',
-    component: Task,
+    name: 'TaskView',
+    component: MainView,
   },
   {
     path: '/:id/update',
-    name: 'UpdateTask',
-    component: AddTask,
+    name: 'UpdateTaskView',
+    component: MainView,
   },
 ];
 

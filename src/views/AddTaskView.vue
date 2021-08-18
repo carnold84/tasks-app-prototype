@@ -1,5 +1,5 @@
 <template>
-  <div class="g_page">
+  <div class="g_stack">
     <div class="g_page-body">
       <div class="g_page-header">
         <h2 class="g_page-header-title">
