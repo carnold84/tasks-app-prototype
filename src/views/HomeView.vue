@@ -1,7 +1,11 @@
 <template>
   <app-view :isDisabled="isDisabled" title="Tasks">
-    <span v-if="items === undefined" class="g_message">Loading...</span>
-    <span v-else-if="items.length === 0" class="g_message">No Tasks</span>
+    <message-screen v-if="items === undefined">
+      Loading...
+    </message-screen>
+    <message-screen v-else-if="items.length === 0">
+      No Tasks
+    </message-screen>
     <ul v-else class="list">
       <template v-for="item of items">
         <list-sub-header v-if="item.type === 'section-header'" :key="item.id">
@@ -39,10 +43,11 @@
   import IconLink from '../components/IconLink.vue';
   import AppView from '../components/AppView.vue';
   import ListSubHeader from '../components/ListSubHeader.vue';
+  import MessageScreen from '../components/MessageScreen.vue';
 
   export default {
     name: 'HomeView',
-    components: { AppView, IconLink, ListItem, ListSubHeader },
+    components: { AppView, IconLink, ListItem, ListSubHeader, MessageScreen },
     props: {
       isDisabled: {
         type: Boolean,

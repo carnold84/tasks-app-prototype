@@ -1,14 +1,15 @@
 .theme-light:root {
+  --primary1: #be27cc;
   --neutral1: #ffffff;
-  --neutral2: #f9f9f9;
-  --neutral3: #f4f4f4;
-  --neutral4: #eeeeee;
-  --neutral5: #e8e8e8;
-  --neutral6: #e3e3e3;
-  --neutral7: #dddddd;
-  --neutral8: #d7d7d7;
-  --neutral9: #d2d2d2;
-  --neutral10: #cccccc;
+  --neutral2: #f9f9f8;
+  --neutral3: #f4f3f1;
+  --neutral4: #eeecea;
+  --neutral5: #e9e6e3;
+  --neutral6: #e3e0dc;
+  --neutral7: #dedad5;
+  --neutral8: #d8d3ce;
+  --neutral9: #d3cdc7;
+  --neutral10: #cdc7c0;
   --text1: #222222;
   --text2: #3a3a3a;
   --text3: #525252;
@@ -21,7 +22,21 @@
     Components
   ------------------------------------------------*/
 
-  /* List Item */
+  /* App View */
+  --c_app_view_bgColor: var(--neutral5);
+  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  --c_app_view_header_bgColor: var(--neutral4);
+  --c_app_view_header_bgImage: repeating-linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.03) 0,
+    rgba(0, 0, 0, 0.03) 1px,
+    var(--c_app_view_header_bgColor) 0,
+    var(--c_app_view_header_bgColor) 50%
+  );
+  --c_app_view_title_color: var(--text2);
+  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+
+  /* Date Time Picker */
   --c_dateTimePicker_bgColor: var(--neutral3);
   --c_dateTimePicker_color: var(--text3);
   --c_dateTimePicker_header_bgColor: var(--neutral5);
@@ -33,24 +48,37 @@
   --c_dateTimePicker_list_scrollbar_track: var(--neutral5);
 
   /* Icon Button */
-  --c_iconButton_bgColor: var(--neutral8);
-  --c_iconButton_fill: var(--text3);
-  --c_iconButton__hover_bgColor: var(--neutral10);
-  --c_iconButton__hover_fill: var(--text1);
+  --c_iconButton_bgColor: var(--neutral2);
+  --c_iconButton_fill: var(--text4);
+  --c_iconButton__hover_bgColor: var(--neutral1);
+  --c_iconButton__hover_fill: var(--text4);
 
   /* Icon Link */
-  --c_iconLink_bgColor: var(--neutral8);
-  --c_iconLink_fill: var(--text3);
+  --c_iconLink_bgColor: var(--c_iconButton_bgColor);
+  --c_iconLink_fill: var(--c_iconButton_fill);
+  --c_iconLink__hover_bgColor: var(--c_iconButton__hover_bgColor);
+  --c_iconLink__hover_fill: var(--c_iconButton__hover_fill);
 
   /* List Item */
   --c_listItem_bgColor: var(--neutral3);
-  --c_listItem_title_color: var(--text1);
-  --c_listItem_dueDate_color: var(--text3);
-  --c_listItem_icon_fill: var(--text6);
+  --c_listItem_title_color: var(--text2);
+  --c_listItem_subTitle_color: var(--text4);
+  --c_listItem_action_fill: var(--text6);
+
+  /* List Sub Header */
+  --c_listSubHeader_color: var(--text5);
+
+  /* Message Screen */
+  --c_messageScreen_color: var(--text3);
 
   /* Task Bar */
-  --c_taskBar_bgColor: var(--neutral3);
-  --c_taskBar_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  --c_taskBar_bgColor: var(--neutral4);
+  --c_taskBar_dropShadow: 0 0 4px rgba(0, 0, 0, 0.1);
+
+  /* Text Display */
+  --c_textDisplay_icon_fill: var(--text5);
+  --c_textDisplay_text_color: var(--text3);
+  --c_textDisplay_subText_color: var(--text4);
 
   /* Text Field */
   --c_textField_label_color: var(--text5);

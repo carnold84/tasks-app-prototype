@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-color: var(--neutral1);
+  background-color: #222222;
   margin: 0;
   padding: 0;
 }
@@ -25,7 +25,6 @@ body {
 }
 
 .g_app-content {
-  background-color: var(--neutral1);
   height: calc(100% - 60px);
   margin: 30px;
   max-height: 812px;
@@ -42,14 +41,4 @@ body {
     max-width: none;
     width: 100%;
   }
-}
-
-.g_message {
-  align-items: center;
-  color: var(--text1);
-  display: flex;
-  flex-grow: 1;
-  font-size: 1.4rem;
-  justify-content: center;
-  margin: 0;
 }

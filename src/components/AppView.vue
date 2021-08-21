@@ -94,6 +94,7 @@
     background-size: 10px 10px;
     background-image: var(--c_app_view_header_bgImage);
     display: flex;
+    filter: drop-shadow(var(--c_app_view_header_dropShadow));
     flex-direction: column;
     flex-shrink: 0;
     height: 50%;

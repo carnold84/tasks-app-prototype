@@ -29,7 +29,7 @@
   }
 
   .c_text_display /deep/ svg {
-    fill: var(--c_TextDisplay_icon_fill);
+    fill: var(--c_textDisplay_icon_fill);
     height: 20px;
     margin: 0 10px 0 0;
     width: 20px;
@@ -41,14 +41,14 @@
   }
 
   .c_text_display .text {
-    color: var(--c_TextDisplay_text_color);
+    color: var(--c_textDisplay_text_color);
     font-size: 1.5rem;
     font-weight: 300;
     margin: 0 0 6px;
   }
 
   .c_text_display .sub_text {
-    color: var(--c_TextDisplay_subText_color);
+    color: var(--c_textDisplay_subText_color);
     font-size: 1.4rem;
     font-weight: 300;
     margin: 0;
