@@ -2,7 +2,7 @@
   <li class="c_list-item">
     <router-link class="text" :to="to">
       <span class="title">{{ title }}</span>
-      <span class="due-date" v-if="subTitle">{{ subTitle }}</span>
+      <span class="sub_title" v-if="subTitle">{{ subTitle }}</span>
     </router-link>
     <router-link :to="`${to}/update`">
       <svg
@@ -56,7 +56,7 @@
 
   .c_list-item a {
     display: flex;
-    padding: 15px;
+    padding: 15px 18px;
     text-decoration: none;
   }
 
@@ -71,8 +71,8 @@
     margin: 0;
   }
 
-  .c_list-item .due-date {
-    color: var(--c_listItem_dueDate_color);
+  .c_list-item .sub_title {
+    color: var(--c_listItem_subTitle_color);
     font-size: 1.2rem;
     font-weight: 300;
     margin: 6px 0 0;
@@ -80,7 +80,7 @@
   }
 
   .c_list-item svg {
-    fill: var(--c_listItem_icon_fill);
+    fill: var(--c_listItem_action_fill);
     height: 20px;
     width: 20px;
   }

@@ -1,5 +1,8 @@
 <template>
-  <button @click="$emit('click')" class="c_icon_button">
+  <button
+    @click="$emit('click')"
+    :class="[{ 'is-secondary': isSecondary }, 'c_icon_button']"
+  >
     <slot />
   </button>
 </template>
@@ -9,6 +12,10 @@
     name: 'IconButton',
     props: {
       isDisabled: {
+        default: false,
+        type: Boolean,
+      },
+      isSecondary: {
         default: false,
         type: Boolean,
       },
@@ -26,6 +33,11 @@
     display: flex;
     justify-content: center;
     padding: 10px;
+  }
+
+  .c_icon_button.is-secondary {
+    background-color: transparent;
+    opacity: 0.3;
   }
 
   .c_icon_button /deep/ svg {

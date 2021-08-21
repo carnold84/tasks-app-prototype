@@ -1,36 +1,35 @@
 <template>
   <app-view :is-stacked="true" :title="title">
-    <div class="section">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M15 19H3V17H15V19ZM21 15H3V13H21V15ZM15 11H3V9H15V11ZM21 7H3V5H21V7Z"
-        />
-      </svg>
-      <p class="notes">{{ notes }}</p>
-    </div>
-    <div class="section">
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4H7V2H9V4H15V2H17V4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22ZM5 10V20H19V10H5ZM5 6V8H19V6H5ZM11 18.414L7.293 14.707L8.707 13.293L11 15.586L15.293 11.293L16.707 12.707L11 18.413V18.414Z"
-        />
-      </svg>
-      <div class="date-text">
-        <p class="due-date">{{ dueDate || 'No Due Date' }}</p>
-        <p v-if="fullDueDate" class="full-due-date">{{ fullDueDate }}</p>
-      </div>
-    </div>
+    <text-display :text="notes">
+      <template v-slot:icon>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M15 19H3V17H15V19ZM21 15H3V13H21V15ZM15 11H3V9H15V11ZM21 7H3V5H21V7Z"
+          />
+        </svg>
+      </template>
+    </text-display>
+    <text-display :sub-text="fullDueDate" :text="dueDate || 'No Due Date'">
+      <template v-slot:icon>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4H7V2H9V4H15V2H17V4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22ZM5 10V20H19V10H5ZM5 6V8H19V6H5ZM11 18.414L7.293 14.707L8.707 13.293L11 15.586L15.293 11.293L16.707 12.707L11 18.413V18.414Z"
+          />
+        </svg>
+      </template>
+    </text-display>
     <template v-slot:task-bar-left-content>
       <icon-link to="/">
         <svg
@@ -47,7 +46,7 @@
       </icon-link>
     </template>
     <template v-if="task" v-slot:task-bar-right-content>
-      <icon-link class="action-btn" :to="`/${task.id}/update`">
+      <icon-link :isSecondary="true" :to="`/${task.id}/update`">
         <svg
           width="24"
           height="24"
@@ -60,7 +59,7 @@
           />
         </svg>
       </icon-link>
-      <icon-button class="action-btn" @click="deleteTask">
+      <icon-button :isSecondary="true" @click="deleteTask">
         <svg
           width="24"
           height="24"
@@ -84,6 +83,7 @@
   import IconLink from '../components/IconLink.vue';
   import IconButton from '../components/IconButton.vue';
   import AppView from '../components/AppView.vue';
+  import TextDisplay from '../components/TextDisplay.vue';
 
   export default {
     name: 'ViewTask',
@@ -96,6 +96,7 @@
       AppView,
       IconButton,
       IconLink,
+      TextDisplay,
     },
     computed: {
       dueDate() {
@@ -147,55 +148,3 @@
     },
   };
 </script>
-
-<style scoped>
-  .section {
-    align-items: center;
-    display: flex;
-    margin: 0 0 10px;
-  }
-
-  .section svg {
-    fill: var(--text5);
-    height: 20px;
-    margin: 0 10px 0 0;
-    width: 20px;
-  }
-
-  .notes {
-    color: var(--text3);
-    font-size: 1.5rem;
-    font-weight: 300;
-  }
-
-  .date-icon {
-    color: var(--text3);
-  }
-
-  .date-text {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .due-date {
-    color: var(--text3);
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin: 0 0 6px;
-  }
-
-  .full-due-date {
-    color: var(--text4);
-    font-size: 1.4rem;
-    font-weight: 300;
-    margin: 0;
-  }
-
-  .action-btn {
-    background-color: transparent;
-  }
-
-  .action-btn svg {
-    fill: var(--text6);
-  }
-</style>

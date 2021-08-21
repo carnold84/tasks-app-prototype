@@ -1,5 +1,8 @@
 <template>
-  <router-link class="c_icon_link" :to="to">
+  <router-link
+    :class="[{ 'is-secondary': isSecondary }, 'c_icon_link']"
+    :to="to"
+  >
     <slot />
   </router-link>
 </template>
@@ -8,6 +11,10 @@
   export default {
     name: 'ActionLink',
     props: {
+      isSecondary: {
+        default: false,
+        type: Boolean,
+      },
       to: {
         required: true,
         type: [Object, String],
@@ -24,6 +31,11 @@
     display: flex;
     justify-content: center;
     padding: 10px;
+  }
+
+  .c_icon_link.is-secondary {
+    background-color: transparent;
+    opacity: 0.3;
   }
 
   .c_icon_link /deep/ svg {

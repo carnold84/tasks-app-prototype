@@ -59,9 +59,9 @@
 
   /* List Item */
   --c_listItem_bgColor: var(--neutral3);
-  --c_listItem_title_color: var(--text1);
-  --c_listItem_dueDate_color: var(--text3);
-  --c_listItem_icon_fill: var(--text6);
+  --c_listItem_title_color: var(--text2);
+  --c_listItem_subTitle_color: var(--text4);
+  --c_listItem_action_fill: var(--text6);
 
   /* List Sub Header */
   --c_listSubHeader_color: var(--text5);
@@ -69,6 +69,11 @@
   /* Task Bar */
   --c_taskBar_bgColor: var(--neutral3);
   --c_taskBar_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+
+  /* Text Display */
+  --c_TextDisplay_icon_fill: var(--text5);
+  --c_TextDisplay_text_color: var(--text3);
+  --c_TextDisplay_subText_color: var(--text4);
 
   /* Text Field */
   --c_textField_label_color: var(--text5);
