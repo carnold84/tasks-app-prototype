@@ -4,13 +4,9 @@
     <span v-else-if="items.length === 0" class="g_message">No Tasks</span>
     <ul v-else class="list">
       <template v-for="item of items">
-        <li
-          v-if="item.type === 'section-header'"
-          class="section-header"
-          :key="item.id"
-        >
+        <list-sub-header v-if="item.type === 'section-header'" :key="item.id">
           {{ item.label }}
-        </li>
+        </list-sub-header>
         <list-item
           v-else
           :key="item.id"
@@ -42,10 +38,11 @@
   import ListItem from '../components/ListItem.vue';
   import IconLink from '../components/IconLink.vue';
   import AppView from '../components/AppView.vue';
+  import ListSubHeader from '../components/ListSubHeader.vue';
 
   export default {
     name: 'HomeView',
-    components: { IconLink, ListItem, AppView },
+    components: { AppView, IconLink, ListItem, ListSubHeader },
     props: {
       isDisabled: {
         type: Boolean,
@@ -131,20 +128,6 @@
     list-style: none;
     margin: 0;
     padding: 0 0 15px;
-  }
-
-  .section-header {
-    color: var(--text5);
-    display: flex;
-    font-size: 1.2rem;
-    font-weight: 300;
-    margin: 7px 0 8px;
-    text-transform: uppercase;
-    width: 100%;
-  }
-
-  .section-header:first-child {
-    margin: 0 0 8px;
   }
 
   .add-btn {

@@ -21,7 +21,20 @@
     Components
   ------------------------------------------------*/
 
-  /* List Item */
+  /* App View */
+  --c_app_view_bgColor: var(--neutral1);
+  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  --c_app_view_header_bgColor: var(--neutral4);
+  --c_app_view_header_bgImage: repeating-linear-gradient(
+    45deg,
+    var(--neutral6) 0,
+    var(--neutral6) 1px,
+    var(--neutral4) 0,
+    var(--neutral4) 50%
+  );
+  --c_app_view_title_color: var(--text1);
+
+  /* Date Time Picker */
   --c_dateTimePicker_bgColor: var(--neutral3);
   --c_dateTimePicker_color: var(--text3);
   --c_dateTimePicker_header_bgColor: var(--neutral5);
@@ -49,6 +62,9 @@
   --c_listItem_title_color: var(--text1);
   --c_listItem_dueDate_color: var(--text3);
   --c_listItem_icon_fill: var(--text6);
+
+  /* List Sub Header */
+  --c_listSubHeader_color: var(--text5);
 
   /* Task Bar */
   --c_taskBar_bgColor: var(--neutral3);

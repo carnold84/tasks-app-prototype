@@ -52,7 +52,7 @@
 
 <style scoped>
   .c_app_view {
-    background-color: var(--neutral1);
+    background-color: var(--c_app_view_bgColor);
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -62,14 +62,9 @@
   }
 
   .c_app_view.is-stacked {
-    background-color: var(--neutral1);
-    display: flex;
-    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(--c_app_view_dropShadow);
     height: calc(100% - 25px);
-    flex-direction: column;
-    position: absolute;
     top: 25px;
-    width: 100%;
   }
 
   .c_app_view.over-enter-active,
@@ -95,15 +90,9 @@
   }
 
   .c_app_view .header {
-    background-color: var(--neutral4);
+    background-color: var(--c_app_view_header_bgColor);
     background-size: 10px 10px;
-    background-image: repeating-linear-gradient(
-      45deg,
-      var(--neutral6) 0,
-      var(--neutral6) 1px,
-      var(--neutral4) 0,
-      var(--neutral4) 50%
-    );
+    background-image: var(--c_app_view_header_bgImage);
     display: flex;
     flex-direction: column;
     flex-shrink: 0;
@@ -121,7 +110,7 @@
   }
 
   .c_app_view .title {
-    color: var(--text1);
+    color: var(--c_app_view_title_color);
     font-size: 2.8rem;
     font-weight: 400;
     line-height: 2.2rem;
