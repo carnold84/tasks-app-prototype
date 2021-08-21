@@ -6,6 +6,16 @@
   </div>
 </template>
 
+<script>
+  export default {
+    mounted() {
+      document.querySelector('html').classList.add('theme-dark');
+    },
+  };
+</script>
+
 <style>
   @import './global.css';
+  @import './themes/dark.css';
+  @import './themes/light.css';
 </style>

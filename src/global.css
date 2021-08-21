@@ -1,5 +1,5 @@
 html {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 10px;
 }
 
@@ -10,7 +10,7 @@ html {
 }
 
 body {
-  background-color: #394247;
+  background-color: var(--neutral1);
   margin: 0;
   padding: 0;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 .g_app-content {
-  background-color: #1b1c1d;
+  background-color: var(--neutral1);
   height: calc(100% - 60px);
   margin: 30px;
   max-height: 812px;
@@ -44,100 +44,9 @@ body {
   }
 }
 
-.g_page {
-  background-color: #1b1c1d;
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  position: absolute;
-  transition: transform 400ms ease-in-out;
-  width: 100%;
-}
-
-.g_page.is-disabled {
-  overflow: hidden;
-  pointer-events: none;
-  transform: scale(0.9) translateY(-20px);
-}
-
-.g_stack {
-  background-color: #1b1c1d;
-  display: flex;
-  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
-  height: calc(100% - 25px);
-  flex-direction: column;
-  position: absolute;
-  top: 25px;
-  width: 100%;
-}
-
-.over-enter-active,
-.over-leave-active {
-  transition: transform 400ms ease-in-out;
-}
-.over-enter, .over-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  transform: translateY(calc(100% + 20px));
-}
-
-.g_page-body {
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  overflow: auto;
-  width: 100%;
-}
-
-.g_page-header {
-  background-color: #262c30;
-  background-size: 10px 10px;
-  background-image: repeating-linear-gradient(
-    45deg,
-    #323a40 0,
-    #323a40 1px,
-    #262c30 0,
-    #262c30 50%
-  );
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  height: 50%;
-  justify-content: flex-end;
-  padding: 20px;
-}
-
-.g_page-content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding: 20px;
-  position: relative;
-}
-
-.g_page-header-title {
-  color: #ffffff;
-  font-size: 2.8rem;
-  line-height: 2.2rem;
-  margin: 0;
-}
-
-.g_back-btn {
-  align-items: center;
-  background-color: #394248;
-  border: none;
-  border-radius: 50%;
-  display: flex;
-  height: 40px;
-  justify-content: center;
-  width: 40px;
-}
-
-.g_back-btn svg {
-  fill: #7a8c98;
-}
-
 .g_message {
   align-items: center;
-  color: #ffffff;
+  color: var(--text1);
   display: flex;
   flex-grow: 1;
   font-size: 1.4rem;

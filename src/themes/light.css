@@ -1,0 +1,62 @@
+.theme-light:root {
+  --neutral1: #ffffff;
+  --neutral2: #f9f9f9;
+  --neutral3: #f4f4f4;
+  --neutral4: #eeeeee;
+  --neutral5: #e8e8e8;
+  --neutral6: #e3e3e3;
+  --neutral7: #dddddd;
+  --neutral8: #d7d7d7;
+  --neutral9: #d2d2d2;
+  --neutral10: #cccccc;
+  --text1: #222222;
+  --text2: #3a3a3a;
+  --text3: #525252;
+  --text4: #696969;
+  --text5: #818181;
+  --text6: #999999;
+  --textError: #d6766a;
+
+  /*------------------------------------------------
+    Components
+  ------------------------------------------------*/
+
+  /* List Item */
+  --c_dateTimePicker_bgColor: var(--neutral3);
+  --c_dateTimePicker_color: var(--text3);
+  --c_dateTimePicker_header_bgColor: var(--neutral5);
+  --c_dateTimePicker_item_color: var(--text1);
+  --c_dateTimePicker_actions_bgColor: var(--neutral5);
+  --c_dateTimePicker_actions_button_color: var(--text1);
+  --c_dateTimePicker_actions_button__hover_color: var(--text1);
+  --c_dateTimePicker_list_scrollbar_thumb: var(--neutral8);
+  --c_dateTimePicker_list_scrollbar_track: var(--neutral5);
+
+  /* Icon Button */
+  --c_iconButton_bgColor: var(--neutral8);
+  --c_iconButton_fill: var(--text3);
+  --c_iconButton__hover_bgColor: var(--neutral10);
+  --c_iconButton__hover_fill: var(--text1);
+
+  /* Icon Link */
+  --c_iconLink_bgColor: var(--neutral8);
+  --c_iconLink_fill: var(--text3);
+
+  /* List Item */
+  --c_listItem_bgColor: var(--neutral3);
+  --c_listItem_title_color: var(--text1);
+  --c_listItem_dueDate_color: var(--text3);
+  --c_listItem_icon_fill: var(--text6);
+
+  /* Task Bar */
+  --c_taskBar_bgColor: var(--neutral3);
+  --c_taskBar_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+
+  /* Text Field */
+  --c_textField_label_color: var(--text5);
+  --c_textField_field_bgColor: var(--neutral3);
+  --c_textField_field_borderColor: var(--neutral3);
+  --c_textField_field_color: var(--text2);
+  --c_textField_field_borderColor__focus: var(--neutral7);
+  --c_textField_error_color: var(--textError);
+}

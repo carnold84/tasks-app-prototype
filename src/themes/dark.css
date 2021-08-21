@@ -1,0 +1,64 @@
+.theme-dark:root {
+  --neutral1: #1b1c1d;
+  --neutral2: #212325;
+  --neutral3: #262a2c;
+  --neutral4: #2c3034;
+  --neutral5: #31373b;
+  --neutral6: #373e43;
+  --neutral7: #3c454a;
+  --neutral8: #424b52;
+  --neutral9: #475259;
+  --neutral10: #4d5961;
+  --text1: #ffffff;
+  --text2: #dee1e3;
+  --text3: #bec4c8;
+  --text4: #9da6ac;
+  --text5: #7d8991;
+  --text6: #5c6b75;
+  --textError: #d6766a;
+
+  /*------------------------------------------------
+    Components
+  ------------------------------------------------*/
+
+  /* List Item */
+  --c_dateTimePicker_bgColor: var(--neutral3);
+  --c_dateTimePicker_color: var(--text3);
+  --c_dateTimePicker_header_bgColor: var(--neutral5);
+  --c_dateTimePicker_item_color: var(--text1);
+  --c_dateTimePicker_actions_bgColor: var(--neutral5);
+  --c_dateTimePicker_actions_button_color: var(--text1);
+  --c_dateTimePicker_actions_button__hover_color: var(--text1);
+  --c_dateTimePicker_list_scrollbar_thumb: var(--neutral8);
+  --c_dateTimePicker_list_scrollbar_track: var(--neutral5);
+
+  /* Icon Button */
+  --c_iconButton_bgColor: var(--neutral8);
+  --c_iconButton_fill: var(--text3);
+  --c_iconButton__hover_bgColor: var(--neutral10);
+  --c_iconButton__hover_fill: var(--text1);
+
+  /* Icon Link */
+  --c_iconLink_bgColor: var(--neutral8);
+  --c_iconLink_fill: var(--text3);
+  --c_iconLink__hover_bgColor: var(--neutral10);
+  --c_iconLink__hover_fill: var(--text1);
+
+  /* List Item */
+  --c_listItem_bgColor: var(--neutral3);
+  --c_listItem_title_color: var(--text1);
+  --c_listItem_dueDate_color: var(--text3);
+  --c_listItem_icon_fill: var(--text6);
+
+  /* Task Bar */
+  --c_taskBar_bgColor: var(--neutral3);
+  --c_taskBar_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+
+  /* Text Field */
+  --c_textField_label_color: var(--text5);
+  --c_textField_field_bgColor: var(--neutral3);
+  --c_textField_field_borderColor: var(--neutral3);
+  --c_textField_field_color: var(--text2);
+  --c_textField_field_borderColor__focus: var(--neutral7);
+  --c_textField_error_color: var(--textError);
+}

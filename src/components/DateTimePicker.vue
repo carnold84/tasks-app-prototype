@@ -54,41 +54,41 @@
 
 <style>
   .vdatetime-popup {
-    background-color: #2c3133;
-    color: #a5b7bd;
-    font-family: 'Source Sans Pro', sans-serif;
+    background-color: var(--c_dateTimePicker_bgColor);
+    color: var(--c_dateTimePicker_color);
+    font-family: 'IBM Plex Sans', sans-serif;
   }
 
   .vdatetime-popup__header,
   .vdatetime-calendar__month__day--selected > span > span,
   .vdatetime-calendar__month__day--selected:hover > span > span {
-    background-color: #353b3d;
+    background-color: var(--c_dateTimePicker_header_bgColor);
   }
 
   .vdatetime-month-picker__item--selected,
   .vdatetime-time-picker__item--selected {
-    color: #ffffff;
+    color: var(--c_dateTimePicker_item_color);
   }
 
   .vdatetime-popup__actions {
-    background-color: #353b3d;
+    background-color: var(--c_dateTimePicker_actions_bgColor);
     padding: 10px 20px 10px 30px;
   }
 
   .vdatetime-popup__actions__button {
-    color: #a5b7bd;
+    color: var(--c_dateTimePicker_actions_button_color);
   }
 
   .vdatetime-popup__actions__button:hover {
-    color: #ffffff;
+    color: var(--c_dateTimePicker_actions_button__hover_color);
   }
 
   .vdatetime-time-picker__list::-webkit-scrollbar-thumb {
-    background-color: #636f73;
+    background-color: var(--c_dateTimePicker_list_scrollbar_thumb);
   }
 
   .vdatetime-time-picker__list::-webkit-scrollbar-track {
-    background: #434b4e;
+    background: var(--c_dateTimePicker_list_scrollbar_track);
   }
 
   .input {

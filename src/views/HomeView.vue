@@ -1,34 +1,27 @@
 <template>
-  <div :class="[{ 'is-disabled': isDisabled }, 'g_page']">
-    <div class="g_page-body">
-      <div class="g_page-header">
-        <h2 class="g_page-header-title">Tasks</h2>
-      </div>
-      <div class="g_page-content">
-        <span v-if="items === undefined" class="g_message">Loading...</span>
-        <span v-else-if="items.length === 0" class="g_message">No Tasks</span>
-        <ul v-else class="list">
-          <template v-for="item of items">
-            <li
-              v-if="item.type === 'section-header'"
-              class="section-header"
-              :key="item.id"
-            >
-              {{ item.label }}
-            </li>
-            <list-item
-              v-else
-              :key="item.id"
-              :subTitle="formatDueDate(item.dueDate)"
-              :title="item.title"
-              :to="`/${item.id}`"
-            />
-          </template>
-        </ul>
-      </div>
-    </div>
-    <task-bar>
-      <router-link class="add-btn" to="/add-task">
+  <app-view :isDisabled="isDisabled" title="Tasks">
+    <span v-if="items === undefined" class="g_message">Loading...</span>
+    <span v-else-if="items.length === 0" class="g_message">No Tasks</span>
+    <ul v-else class="list">
+      <template v-for="item of items">
+        <li
+          v-if="item.type === 'section-header'"
+          class="section-header"
+          :key="item.id"
+        >
+          {{ item.label }}
+        </li>
+        <list-item
+          v-else
+          :key="item.id"
+          :subTitle="formatDueDate(item.dueDate)"
+          :title="item.title"
+          :to="`/${item.id}`"
+        />
+      </template>
+    </ul>
+    <template v-slot:task-bar-center-content>
+      <icon-link class="add-btn" to="/add-task">
         <svg
           width="24"
           height="24"
@@ -38,20 +31,21 @@
         >
           <path d="M13 13V19H11V13H5V11H11V5H13V11H19V13H13Z" />
         </svg>
-      </router-link>
-    </task-bar>
-  </div>
+      </icon-link>
+    </template>
+  </app-view>
 </template>
 
 <script>
   import api from '../api';
   import { formatFull, formatRelative, getStartOfDay } from '../utils/dates';
-  import TaskBar from '../components/TaskBar.vue';
   import ListItem from '../components/ListItem.vue';
+  import IconLink from '../components/IconLink.vue';
+  import AppView from '../components/AppView.vue';
 
   export default {
     name: 'HomeView',
-    components: { ListItem, TaskBar },
+    components: { IconLink, ListItem, AppView },
     props: {
       isDisabled: {
         type: Boolean,
@@ -108,7 +102,7 @@
         // add section for no due date
         if (noDueDate.length > 0) {
           items.push({
-            label: 'No Due Date',
+            label: 'No Reminder',
             type: 'section-header',
           });
           items.push(...noDueDate);
@@ -140,10 +134,12 @@
   }
 
   .section-header {
-    color: #a5aaaf;
+    color: var(--text5);
     display: flex;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    font-weight: 300;
     margin: 7px 0 8px;
+    text-transform: uppercase;
     width: 100%;
   }
 
@@ -152,21 +148,11 @@
   }
 
   .add-btn {
-    align-items: center;
-    background-color: #394248;
-    border-radius: 50%;
-    display: flex;
-    fill: #697984;
     height: 60px;
-    justify-content: center;
     left: 50%;
     position: absolute;
     top: 0;
     transform: translate(-50%, -50%);
     width: 60px;
-  }
-
-  .add-btn svg {
-    fill: #7a8c98;
   }
 </style>

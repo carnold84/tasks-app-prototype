@@ -1,10 +1,10 @@
 <template>
-  <div class="c_task-bar">
+  <div class="c_task_bar">
     <div class="left-content">
       <slot name="left-content" />
     </div>
-    <div class="main-content">
-      <slot />
+    <div class="center-content">
+      <slot name="center-content" />
     </div>
     <div class="right-content">
       <slot name="right-content" />
@@ -19,16 +19,16 @@
 </script>
 
 <style scoped>
-  .c_task-bar {
-    background-color: #262c30;
-    filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.5));
+  .c_task_bar {
+    background-color: var(--c_taskBar_bgColor);
+    filter: drop-shadow(var(--c_taskBar_dropShadow));
     display: flex;
     flex-shrink: 0;
     height: 70px;
     position: relative;
   }
 
-  .c_task-bar .main-content {
+  .c_task_bar .center-content {
     align-items: center;
     display: flex;
     height: 40px;
@@ -39,7 +39,7 @@
     transform: translateX(-50%);
   }
 
-  .c_task-bar .left-content {
+  .c_task_bar .left-content {
     align-items: center;
     display: flex;
     height: 40px;
@@ -49,7 +49,7 @@
     top: 15px;
   }
 
-  .c_task-bar .right-content {
+  .c_task_bar .right-content {
     align-items: center;
     display: flex;
     height: 40px;

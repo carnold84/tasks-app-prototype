@@ -40,7 +40,7 @@
 <style scoped>
   .c_list-item {
     align-items: center;
-    background-color: #262c30;
+    background-color: var(--c_listItem_bgColor);
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
@@ -65,18 +65,22 @@
   }
 
   .c_list-item .title {
-    color: #ffffff;
-    font-size: 1.4rem;
-    margin: 0 0 6px;
+    color: var(--c_listItem_title_color);
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin: 0;
   }
 
   .c_list-item .due-date {
-    color: #bec7ce;
-    font-size: 1.3rem;
+    color: var(--c_listItem_dueDate_color);
+    font-size: 1.2rem;
+    font-weight: 300;
+    margin: 6px 0 0;
+    text-transform: uppercase;
   }
 
   .c_list-item svg {
-    fill: #697984;
+    fill: var(--c_listItem_icon_fill);
     height: 20px;
     width: 20px;
   }
