@@ -69,6 +69,14 @@
   /* Message Screen */
   --c_messageScreen_color: var(--text3);
 
+  /* Select Menu */
+  --c_selectMenu_color: var(--text4);
+  --c_selectMenu__hover_color: var(--text1);
+  --c_selectMenu_bgColor: var(--neutral6);
+  --c_selectMenu_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  --c_selectMenu_openBtn_fill: var(--text5);
+  --c_selectMenu_openBtn__hover_fill: var(--text1);
+
   /* Task Bar */
   --c_taskBar_bgColor: var(--neutral3);
   --c_taskBar_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);

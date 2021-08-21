@@ -1,5 +1,6 @@
 .theme-light:root {
-  --primary1: #be27cc;
+  --primary1: #f9c83e;
+  --primary2: #ebba34;
   --neutral1: #ffffff;
   --neutral2: #f9f9f8;
   --neutral3: #f4f3f1;
@@ -25,7 +26,7 @@
   /* App View */
   --c_app_view_bgColor: var(--neutral5);
   --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
-  --c_app_view_header_bgColor: var(--neutral4);
+  --c_app_view_header_bgColor: var(--primary1);
   --c_app_view_header_bgImage: repeating-linear-gradient(
     45deg,
     rgba(0, 0, 0, 0.03) 0,
@@ -48,10 +49,10 @@
   --c_dateTimePicker_list_scrollbar_track: var(--neutral5);
 
   /* Icon Button */
-  --c_iconButton_bgColor: var(--neutral2);
-  --c_iconButton_fill: var(--text4);
-  --c_iconButton__hover_bgColor: var(--neutral1);
-  --c_iconButton__hover_fill: var(--text4);
+  --c_iconButton_bgColor: var(--primary1);
+  --c_iconButton_fill: var(--text1);
+  --c_iconButton__hover_bgColor: var(--primary2);
+  --c_iconButton__hover_fill: var(--text1);
 
   /* Icon Link */
   --c_iconLink_bgColor: var(--c_iconButton_bgColor);
@@ -70,6 +71,14 @@
 
   /* Message Screen */
   --c_messageScreen_color: var(--text3);
+
+  /* Select Menu */
+  --c_selectMenu_color: var(--text4);
+  --c_selectMenu__hover_color: var(--text1);
+  --c_selectMenu_bgColor: var(--neutral1);
+  --c_selectMenu_dropShadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  --c_selectMenu_openBtn_fill: var(--text5);
+  --c_selectMenu_openBtn__hover_fill: var(--text1);
 
   /* Task Bar */
   --c_taskBar_bgColor: var(--neutral4);
