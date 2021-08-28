@@ -116,7 +116,7 @@
 
   .c_text-field .field {
     background-color: var(--c_textField_field_bgColor);
-    border: 1px solid var(--c-textField-field-borderColor);
+    border: 1px solid var(--c_textField_field_borderColor);
     border-radius: 10px;
     color: var(--c_textField_field_color);
     font-family: inherit;

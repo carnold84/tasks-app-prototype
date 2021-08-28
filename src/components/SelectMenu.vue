@@ -75,6 +75,7 @@
     bottom: 0;
     display: none;
     filter: drop-shadow(var(--c_selectMenu_dropShadow));
+    flex-direction: column;
     max-width: 160px;
     position: absolute;
     right: 0;

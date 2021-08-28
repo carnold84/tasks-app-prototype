@@ -6,13 +6,17 @@
       label="Title"
       style="margin: 0 0 15px;"
     />
+    <date-time-picker
+      v-model="dueDate"
+      label="Due Date"
+      style="margin: 0 0 15px;"
+    />
     <text-field
       v-model="notes"
       label="Notes"
-      style="height: 150px; margin: 0 0 15px;"
+      style="height: 150px;"
       type="textArea"
     />
-    <date-time-picker v-model="dueDate" label="Due Date" />
     <template v-slot:task-bar-left-content>
       <icon-button @click="onBack">
         <svg

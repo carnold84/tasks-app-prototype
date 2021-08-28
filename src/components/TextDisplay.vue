@@ -2,14 +2,21 @@
   <div class="c_text_display">
     <slot name="icon" />
     <div class="content">
-      <p class="text">{{ text }}</p>
-      <p v-if="subText" class="sub_text">{{ subText }}</p>
+      <c-typography class="text" component="p" variant="p">
+        {{ text }}
+      </c-typography>
+      <c-typography v-if="subText" class="sub_text" component="p" variant="p">
+        {{ subText }}
+      </c-typography>
     </div>
   </div>
 </template>
 
 <script>
+  import CTypography from './CTypography.vue';
+
   export default {
+    components: { CTypography },
     name: 'TextDisplay',
     props: {
       subText: String,
@@ -41,16 +48,11 @@
   }
 
   .c_text_display .text {
-    color: var(--c_textDisplay_text_color);
-    font-size: 1.5rem;
-    font-weight: 300;
-    margin: 0 0 6px;
+    margin: 0;
   }
 
   .c_text_display .sub_text {
     color: var(--c_textDisplay_subText_color);
-    font-size: 1.4rem;
-    font-weight: 300;
     margin: 0;
   }
 </style>

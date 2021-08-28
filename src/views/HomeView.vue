@@ -41,6 +41,11 @@
             label: `Toggle theme`,
             value: true,
           },
+          {
+            id: 'sign-out',
+            label: `Sign Out`,
+            value: true,
+          },
         ]"
         @select="onSelect"
       >
@@ -146,10 +151,13 @@
 
         this.items = items;
       },
-      onSelect(id) {
+      async onSelect(id) {
         console.log('onSelect', id);
         if (id === 'theme') {
           EventBus.$emit('themeChanged');
+        } else if (id === 'sign-out') {
+          await api.users.signOut();
+          this.$router.push('/sign-in');
         }
       },
     },

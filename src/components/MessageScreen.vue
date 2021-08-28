@@ -1,11 +1,14 @@
 <template>
-  <div class="c_message_screen">
+  <c-typography class="c_message_screen">
     <slot />
-  </div>
+  </c-typography>
 </template>
 
 <script>
+  import CTypography from './CTypography.vue';
+
   export default {
+    components: { CTypography },
     name: 'MessageScreen',
   };
 </script>
@@ -16,7 +19,6 @@
     color: var(--c_messageScreen_color);
     display: flex;
     flex-grow: 1;
-    font-size: 1.4rem;
     justify-content: center;
     margin: 0;
   }

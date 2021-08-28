@@ -7,7 +7,9 @@
   >
     <div class="body">
       <div class="header">
-        <h2 class="title">{{ title }}</h2>
+        <c-typography component="h2" style="margin: 0;" variant="h2">
+          {{ title }}
+        </c-typography>
       </div>
       <div class="content">
         <slot />
@@ -28,10 +30,11 @@
 </template>
 
 <script>
+  import CTypography from './CTypography.vue';
   import TaskBar from './TaskBar.vue';
 
   export default {
-    components: { TaskBar },
+    components: { TaskBar, CTypography },
     name: 'AppView',
     props: {
       isDisabled: {

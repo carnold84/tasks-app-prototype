@@ -74,6 +74,34 @@ const api = {
       return updatedTask;
     },
   },
+  users: {
+    async getUser() {
+      const state = await getState();
+
+      return state.user;
+    },
+    async signIn({ email, password }) {
+      const state = await getState();
+
+      if (email === 'demo@user.com' && password === 'password') {
+        state.user = {
+          email: 'demo@user.com',
+          id: '1',
+          name: 'Demo User',
+        };
+        await setState(state);
+        return state.user;
+      } else {
+        return undefined;
+      }
+    },
+    async signOut() {
+      const state = await getState();
+
+      state.user = undefined;
+      await setState(state);
+    },
+  },
 };
 
 export default api;
