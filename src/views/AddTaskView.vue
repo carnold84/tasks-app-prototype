@@ -1,22 +1,26 @@
 <template>
   <app-view :is-stacked="true" :title="id ? 'Update Task' : 'Add Task'">
-    <text-field
-      v-model="title"
-      :isRequired="true"
-      label="Title"
-      style="margin: 0 0 15px;"
-    />
-    <date-time-picker
-      v-model="dueDate"
-      label="Due Date"
-      style="margin: 0 0 15px;"
-    />
-    <text-field
-      v-model="notes"
-      label="Notes"
-      style="height: 150px;"
-      type="textArea"
-    />
+    <message-screen v-if="isLoading">Loading...</message-screen>
+    <message-screen v-else-if="isSaving">Saving...</message-screen>
+    <div v-else>
+      <text-field
+        v-model="title"
+        :isRequired="true"
+        label="Title"
+        style="margin: 0 0 15px;"
+      />
+      <date-time-picker
+        v-model="dueDate"
+        label="Due Date"
+        style="margin: 0 0 15px;"
+      />
+      <text-field
+        v-model="notes"
+        label="Notes"
+        style="height: 150px;"
+        type="textArea"
+      />
+    </div>
     <template v-slot:task-bar-left-content>
       <icon-button @click="onBack">
         <svg
@@ -55,14 +59,23 @@
   import AppView from '../components/AppView.vue';
   import DateTimePicker from '../components/DateTimePicker.vue';
   import IconButton from '../components/IconButton.vue';
+  import MessageScreen from '../components/MessageScreen.vue';
   import TextField from '../components/TextField.vue';
 
   export default {
     name: 'AddTask',
-    components: { AppView, DateTimePicker, IconButton, TextField },
+    components: {
+      AppView,
+      DateTimePicker,
+      IconButton,
+      TextField,
+      MessageScreen,
+    },
     data() {
       return {
         dueDate: undefined,
+        isLoading: false,
+        isSaving: false,
         notes: '',
         title: '',
       };
@@ -78,15 +91,21 @@
     methods: {
       async getTask() {
         if (this.id) {
+          this.isLoading = true;
+
           const task = await api.tasks.getById(this.id);
 
           this.dueDate = task.dueDate;
           this.notes = task.notes;
           this.title = task.title;
+
+          this.isLoading = false;
         }
       },
       async onAdd() {
         if (this.title !== '') {
+          this.isSaving = true;
+
           const task = {
             dueDate: this.dueDate,
             notes: this.notes,

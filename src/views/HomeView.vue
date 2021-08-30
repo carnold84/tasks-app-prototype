@@ -16,7 +16,7 @@
           :key="item.id"
           :subTitle="formatDueDate(item.dueDate)"
           :title="item.title"
-          :to="`/${item.id}`"
+          :to="`/task/${item.id}`"
         />
       </template>
     </ul>

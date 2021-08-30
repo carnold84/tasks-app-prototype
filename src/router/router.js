@@ -23,14 +23,18 @@ const routes = [
     component: MainView,
   },
   {
-    path: '/:id',
+    path: '/task/:id',
     name: 'TaskView',
     component: MainView,
   },
   {
-    path: '/:id/update',
+    path: '/task/:id/update',
     name: 'UpdateTaskView',
     component: MainView,
+  },
+  {
+    path: '*',
+    redirect: '/',
   },
 ];
 
@@ -44,7 +48,7 @@ let user = null;
 
 router.beforeEach(async (to, from, next) => {
   if (to.name !== 'SignInView' && !user) {
-    const user = await api.users.getUser();
+    user = await api.users.getUser();
 
     if (user) {
       next();

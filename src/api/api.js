@@ -11,95 +11,125 @@ const setState = async (state) => {
   return await localStorage.setItem('task_app', JSON.stringify(state));
 };
 
+const request = (callback) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      try {
+        const response = await callback();
+
+        resolve(response);
+      } catch (err) {
+        reject(err);
+      }
+    }, 2000);
+  });
+};
+
 const api = {
   tasks: {
     create: async (data) => {
-      const nextTask = {
-        ...data,
-        created: DateTime.now().toString(),
-        id: uuidv4(),
-        updated: DateTime.now().toString(),
-      };
+      return await request(async () => {
+        const nextTask = {
+          ...data,
+          created: DateTime.now().toString(),
+          id: uuidv4(),
+          updated: DateTime.now().toString(),
+        };
 
-      const state = await getState();
+        const state = await getState();
 
-      state.tasks.push(nextTask);
+        state.tasks.push(nextTask);
 
-      await setState(state);
+        await setState(state);
 
-      return nextTask;
+        return nextTask;
+      });
     },
     delete: async (id) => {
-      const state = await getState();
+      return await request(async () => {
+        const state = await getState();
 
-      state.tasks = state.tasks.filter((task) => {
-        return task.id !== id;
+        state.tasks = state.tasks.filter((task) => {
+          return task.id !== id;
+        });
+
+        await setState(state);
+
+        return id;
       });
-
-      await setState(state);
-
-      return id;
     },
     getAll: async () => {
-      const state = await getState();
+      return await request(async () => {
+        const state = await getState();
 
-      return state.tasks;
+        return state.tasks;
+      });
     },
     getById: async (id) => {
-      const state = await getState();
+      return await request(async () => {
+        const state = await getState();
 
-      return state.tasks.filter((task) => {
-        return task.id === id;
-      })[0];
+        return state.tasks.filter((task) => {
+          return task.id === id;
+        })[0];
+      });
     },
     update: async (data) => {
-      const state = await getState();
-      let updatedTask;
+      return await request(async () => {
+        const state = await getState();
+        let updatedTask;
 
-      state.tasks = state.tasks.map((task) => {
-        if (task.id === data.id) {
-          updatedTask = {
-            ...task,
-            ...data,
-            updated: DateTime.now().toString(),
-          };
-          return updatedTask;
-        }
+        state.tasks = state.tasks.map((task) => {
+          if (task.id === data.id) {
+            updatedTask = {
+              ...task,
+              ...data,
+              updated: DateTime.now().toString(),
+            };
+            return updatedTask;
+          }
 
-        return task;
+          return task;
+        });
+
+        await setState(state);
+
+        return updatedTask;
       });
-
-      await setState(state);
-
-      return updatedTask;
     },
   },
   users: {
     async getUser() {
-      const state = await getState();
+      return await request(async () => {
+        const state = await getState();
 
-      return state.user;
+        return state.user;
+      });
     },
     async signIn({ email, password }) {
-      const state = await getState();
+      return await request(async () => {
+        const state = await getState();
 
-      if (email === 'demo@user.com' && password === 'password') {
-        state.user = {
-          email: 'demo@user.com',
-          id: '1',
-          name: 'Demo User',
-        };
-        await setState(state);
-        return state.user;
-      } else {
-        return undefined;
-      }
+        if (email === 'demo@user.com' && password === 'password') {
+          state.user = {
+            email: 'demo@user.com',
+            id: '1',
+            name: 'Demo User',
+          };
+          await setState(state);
+          return state.user;
+        } else {
+          return undefined;
+        }
+      });
     },
     async signOut() {
-      const state = await getState();
+      return await request(async () => {
+        const state = await getState();
 
-      state.user = undefined;
-      await setState(state);
+        state.user = undefined;
+        await setState(state);
+      });
     },
   },
 };

@@ -1,6 +1,9 @@
 <template>
   <div class="sign-in-view">
-    <div class="container">
+    <div v-if="isLoading" class="container">
+      <message-screen>Signing in...</message-screen>
+    </div>
+    <div v-else class="container">
       <c-typography class="title" component="h2" variant="h2">
         Sign In
       </c-typography>
@@ -32,6 +35,7 @@
   import api from '../api';
   import CTypography from '../components/CTypography.vue';
   import IconButton from '../components/IconButton.vue';
+  import MessageScreen from '../components/MessageScreen.vue';
   import TextField from '../components/TextField.vue';
 
   export default {
@@ -40,17 +44,18 @@
       TextField,
       IconButton,
       CTypography,
+      MessageScreen,
     },
     data() {
       return {
         email: 'demo@user.com',
         errors: [],
+        isLoading: false,
         password: 'password',
       };
     },
     methods: {
       async onSubmit() {
-        console.log(this.email, this.password);
         this.errors = [];
 
         if (this.email === '') {
@@ -62,6 +67,8 @@
         }
 
         if (this.email && this.password) {
+          this.isLoading = true;
+
           const response = await api.users.signIn({
             email: this.email,
             password: this.password,
@@ -70,9 +77,9 @@
           if (response) {
             this.$router.push('/');
           } else {
+            this.isLoading = false;
             this.errors.push('Email or password is incorrect.');
           }
-          console.log(response);
         }
       },
     },
@@ -97,7 +104,9 @@
     flex-direction: column;
     margin: 0 20px;
     max-width: 400px;
+    min-height: 220px;
     padding: 20px;
+    position: relative;
     width: 100%;
   }
 

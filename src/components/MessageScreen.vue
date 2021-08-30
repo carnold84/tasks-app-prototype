@@ -21,5 +21,6 @@
     flex-grow: 1;
     justify-content: center;
     margin: 0;
+    width: 100%;
   }
 </style>
