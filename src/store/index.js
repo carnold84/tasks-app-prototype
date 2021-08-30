@@ -4,6 +4,7 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  strict: true,
   state: {
     currentTheme: 'default',
     tasks: {
@@ -24,12 +25,13 @@ export default new Vuex.Store({
 
       document.querySelector('html').classList.add(`theme-${theme}`);
     },
-    setTheme(state, payload) {
+    toggleTheme(state) {
       document
         .querySelector('html')
         .classList.remove(`theme-${state.currentTheme}`);
 
-      state.currentTheme = payload;
+      state.currentTheme =
+        state.currentTheme === 'default' ? 'light' : 'default';
       localStorage.setItem('tasks-theme', state.currentTheme);
 
       document
@@ -41,8 +43,8 @@ export default new Vuex.Store({
     initTheme({ commit }) {
       commit('initTheme');
     },
-    setTheme({ commit }, payload) {
-      commit('setTheme', payload);
+    toggleTheme({ commit }) {
+      commit('toggleTheme');
     },
   },
   modules: {},

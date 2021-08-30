@@ -96,11 +96,6 @@
         items: undefined,
       };
     },
-    computed: {
-      currentTheme() {
-        return this.$store.getters.currentTheme;
-      },
-    },
     methods: {
       formatDueDate(date) {
         if (date) {
@@ -157,9 +152,7 @@
       },
       async onSelect(id) {
         if (id === 'theme') {
-          const nextTheme =
-            this.currentTheme === 'default' ? 'light' : 'default';
-          this.$store.dispatch('setTheme', nextTheme);
+          this.$store.dispatch('toggleTheme');
         } else if (id === 'sign-out') {
           await api.users.signOut();
           this.$router.push('/sign-in');
