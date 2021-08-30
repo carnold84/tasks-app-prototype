@@ -75,7 +75,6 @@
   import ListSubHeader from '../components/ListSubHeader.vue';
   import MessageScreen from '../components/MessageScreen.vue';
   import SelectMenu from '../components/SelectMenu.vue';
-  import { EventBus } from '../eventBus';
 
   export default {
     name: 'HomeView',
@@ -96,6 +95,11 @@
       return {
         items: undefined,
       };
+    },
+    computed: {
+      currentTheme() {
+        return this.$store.getters.currentTheme;
+      },
     },
     methods: {
       formatDueDate(date) {
@@ -152,9 +156,10 @@
         this.items = items;
       },
       async onSelect(id) {
-        console.log('onSelect', id);
         if (id === 'theme') {
-          EventBus.$emit('themeChanged');
+          const nextTheme =
+            this.currentTheme === 'default' ? 'light' : 'default';
+          this.$store.dispatch('setTheme', nextTheme);
         } else if (id === 'sign-out') {
           await api.users.signOut();
           this.$router.push('/sign-in');
