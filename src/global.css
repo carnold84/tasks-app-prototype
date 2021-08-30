@@ -29,6 +29,7 @@ body {
   margin: 30px;
   max-height: 812px;
   max-width: 375px;
+  overflow: hidden;
   position: relative;
   width: calc(100% - 60px);
 }
