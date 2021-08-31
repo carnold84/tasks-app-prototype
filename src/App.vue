@@ -9,7 +9,7 @@
 <script>
   export default {
     mounted() {
-      this.$store.dispatch('initTheme');
+      this.$store.dispatch('theme/init');
     },
   };
 </script>

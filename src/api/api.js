@@ -103,7 +103,9 @@ const api = {
       return await request(async () => {
         const state = await getState();
 
-        return state.user;
+        return {
+          data: state.user,
+        };
       });
     },
     async signIn({ email, password }) {
@@ -117,9 +119,14 @@ const api = {
             name: 'Demo User',
           };
           await setState(state);
-          return state.user;
+
+          return {
+            data: state.user,
+          };
         } else {
-          return undefined;
+          return {
+            error: 'Sign in failed.',
+          };
         }
       });
     },

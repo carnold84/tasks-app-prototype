@@ -32,7 +32,6 @@
 </template>
 
 <script>
-  import api from '../api';
   import CTypography from '../components/CTypography.vue';
   import IconButton from '../components/IconButton.vue';
   import MessageScreen from '../components/MessageScreen.vue';
@@ -69,16 +68,18 @@
         if (this.email && this.password) {
           this.isLoading = true;
 
-          const response = await api.users.signIn({
+          const response = await this.$store.dispatch('auth/signIn', {
             email: this.email,
             password: this.password,
           });
 
-          if (response) {
-            this.$router.push('/');
-          } else {
+          console.log(response);
+
+          if (response.error) {
             this.isLoading = false;
             this.errors.push('Email or password is incorrect.');
+          } else {
+            this.$router.push('/');
           }
         }
       },

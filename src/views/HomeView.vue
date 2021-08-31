@@ -67,7 +67,6 @@
 </template>
 
 <script>
-  import api from '../api';
   import { formatFull, formatRelative, getStartOfDay } from '../utils/dates';
   import ListItem from '../components/ListItem.vue';
   import IconLink from '../components/IconLink.vue';
@@ -91,10 +90,62 @@
         type: Boolean,
       },
     },
-    data() {
-      return {
-        items: undefined,
-      };
+    computed: {
+      items() {
+        console.log(this.tasks);
+        if (this.tasks) {
+          let items = [];
+          const daysLookup = {};
+          const noDueDate = [];
+
+          // group by day
+          this.tasks.forEach((task) => {
+            if (task.dueDate) {
+              const startOfDay = getStartOfDay(task.dueDate);
+
+              if (daysLookup[startOfDay] === undefined) {
+                daysLookup[startOfDay] = [];
+              }
+              daysLookup[startOfDay].push(task);
+            } else {
+              noDueDate.push(task);
+            }
+          });
+
+          // convert lookup to array and sort by key (day)
+          const days = Object.entries(daysLookup).sort(([keyA], [keyB]) => {
+            return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
+          });
+
+          // add tasks to items array with section headers
+          for (const [day, tasks] of days) {
+            items.push({
+              label: formatRelative(day),
+              type: 'section-header',
+            });
+            tasks.sort(function(a, b) {
+              return a.dueDate < b.dueDate ? -1 : a.dueDate > b.dueDate ? 1 : 0;
+            });
+            items.push(...tasks);
+          }
+
+          // add section for no due date
+          if (noDueDate.length > 0) {
+            items.push({
+              label: 'No Reminder',
+              type: 'section-header',
+            });
+            items.push(...noDueDate);
+          }
+
+          return items;
+        }
+
+        return undefined;
+      },
+      tasks() {
+        return this.$store.getters['tasks/getAll'];
+      },
     },
     methods: {
       formatDueDate(date) {
@@ -102,72 +153,17 @@
           return formatFull(date);
         }
       },
-      async loadTasks() {
-        const tasks = await api.tasks.getAll();
-        let items = [];
-        const daysLookup = {};
-        const noDueDate = [];
-
-        // group by day
-        tasks.forEach((task) => {
-          if (task.dueDate) {
-            const startOfDay = getStartOfDay(task.dueDate);
-
-            if (daysLookup[startOfDay] === undefined) {
-              daysLookup[startOfDay] = [];
-            }
-            daysLookup[startOfDay].push(task);
-          } else {
-            noDueDate.push(task);
-          }
-        });
-
-        // convert lookup to array and sort by key (day)
-        const days = Object.entries(daysLookup).sort(([keyA], [keyB]) => {
-          return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
-        });
-
-        // add tasks to items array with section headers
-        for (const [day, tasks] of days) {
-          items.push({
-            label: formatRelative(day),
-            type: 'section-header',
-          });
-          tasks.sort(function(a, b) {
-            return a.dueDate < b.dueDate ? -1 : a.dueDate > b.dueDate ? 1 : 0;
-          });
-          items.push(...tasks);
-        }
-
-        // add section for no due date
-        if (noDueDate.length > 0) {
-          items.push({
-            label: 'No Reminder',
-            type: 'section-header',
-          });
-          items.push(...noDueDate);
-        }
-
-        this.items = items;
-      },
       async onSelect(id) {
         if (id === 'theme') {
-          this.$store.dispatch('toggleTheme');
+          this.$store.dispatch('theme/toggle');
         } else if (id === 'sign-out') {
-          await api.users.signOut();
+          await this.$store.dispatch('auth/signOut');
           this.$router.push('/sign-in');
         }
       },
     },
     async mounted() {
-      this.loadTasks();
-    },
-    watch: {
-      isDisabled(value) {
-        if (value === false) {
-          this.loadTasks();
-        }
-      },
+      this.$store.dispatch('tasks/load');
     },
   };
 </script>

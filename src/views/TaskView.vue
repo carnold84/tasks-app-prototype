@@ -96,7 +96,6 @@
     data() {
       return {
         isEditing: false,
-        task: undefined,
       };
     },
     components: {
@@ -132,20 +131,14 @@
       notes() {
         return this.task?.notes ? this.task.notes : 'No notes';
       },
+      task() {
+        return this.$store.getters.task(this.id);
+      },
       title() {
         return this.task?.title ?? '';
       },
     },
-    mounted() {
-      this.getTask();
-    },
     methods: {
-      async getTask() {
-        if (this.id) {
-          const task = await api.tasks.getById(this.id);
-          this.task = task;
-        }
-      },
       async deleteTask() {
         if (this.id) {
           await api.tasks.delete(this.id);
