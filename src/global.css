@@ -25,6 +25,7 @@ body {
 }
 
 .g_app-content {
+  background-color: #1b1c1d;
   height: calc(100% - 60px);
   margin: 30px;
   max-height: 812px;

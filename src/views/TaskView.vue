@@ -83,7 +83,6 @@
 
 <script>
   import { DateTime } from 'luxon';
-  import api from '../api';
   import { formatFull, formatTime } from '../utils/dates';
   import IconLink from '../components/IconLink.vue';
   import IconButton from '../components/IconButton.vue';
@@ -132,7 +131,7 @@
         return this.task?.notes ? this.task.notes : 'No notes';
       },
       task() {
-        return this.$store.getters.task(this.id);
+        return this.$store.getters['tasks/getById'](this.id);
       },
       title() {
         return this.task?.title ?? '';
@@ -141,7 +140,7 @@
     methods: {
       async deleteTask() {
         if (this.id) {
-          await api.tasks.delete(this.id);
+          await this.$store.dispatch('tasks/delete', this.id);
 
           this.$router.go(-1);
         }

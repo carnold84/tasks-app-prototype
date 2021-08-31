@@ -42,20 +42,30 @@ const api = {
 
         await setState(state);
 
-        return nextTask;
+        return {
+          data: nextTask,
+        };
       });
     },
     delete: async (id) => {
       return await request(async () => {
         const state = await getState();
+        let deletedTask;
 
         state.tasks = state.tasks.filter((task) => {
-          return task.id !== id;
+          if (task.id !== id) {
+            return true;
+          } else {
+            deletedTask = task;
+            return false;
+          }
         });
 
         await setState(state);
 
-        return id;
+        return {
+          data: deletedTask,
+        };
       });
     },
     getAll: async () => {
@@ -94,7 +104,9 @@ const api = {
 
         await setState(state);
 
-        return updatedTask;
+        return {
+          data: updatedTask,
+        };
       });
     },
   },

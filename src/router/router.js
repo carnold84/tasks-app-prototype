@@ -50,8 +50,6 @@ router.beforeEach(async (to, from, next) => {
   if (!user) {
     user = await store.dispatch('auth/getUser');
 
-    console.log(user, to);
-
     if (user) {
       if (to.name === 'SignInView') {
         next({ name: 'MainView' });

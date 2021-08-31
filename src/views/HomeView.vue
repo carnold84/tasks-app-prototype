@@ -92,7 +92,6 @@
     },
     computed: {
       items() {
-        console.log(this.tasks);
         if (this.tasks) {
           let items = [];
           const daysLookup = {};

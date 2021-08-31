@@ -1,7 +1,6 @@
 <template>
   <app-view :is-stacked="true" :title="id ? 'Update Task' : 'Add Task'">
-    <message-screen v-if="isLoading">Loading...</message-screen>
-    <message-screen v-else-if="isSaving">Saving...</message-screen>
+    <message-screen v-if="isSaving">Saving...</message-screen>
     <div v-else>
       <text-field
         v-model="title"
@@ -55,7 +54,6 @@
 </template>
 
 <script>
-  import api from '../api';
   import AppView from '../components/AppView.vue';
   import DateTimePicker from '../components/DateTimePicker.vue';
   import IconButton from '../components/IconButton.vue';
@@ -72,12 +70,15 @@
       MessageScreen,
     },
     data() {
+      const id = this.$route?.params?.id;
+      const task = this.$store.getters['tasks/getById'](id);
+
       return {
-        dueDate: undefined,
+        dueDate: task?.dueDate ?? undefined,
         isLoading: false,
         isSaving: false,
-        notes: '',
-        title: '',
+        notes: task?.notes ?? '',
+        title: task?.title ?? '',
       };
     },
     computed: {
@@ -85,23 +86,7 @@
         return this.$route?.params?.id;
       },
     },
-    mounted() {
-      this.getTask();
-    },
     methods: {
-      async getTask() {
-        if (this.id) {
-          this.isLoading = true;
-
-          const task = await api.tasks.getById(this.id);
-
-          this.dueDate = task.dueDate;
-          this.notes = task.notes;
-          this.title = task.title;
-
-          this.isLoading = false;
-        }
-      },
       async onAdd() {
         if (this.title !== '') {
           this.isSaving = true;
@@ -111,12 +96,23 @@
             notes: this.notes,
             title: this.title,
           };
+
+          let response;
+
           if (this.id) {
-            await api.tasks.update({ ...task, id: this.id });
+            response = await this.$store.dispatch('tasks/update', {
+              ...task,
+              id: this.id,
+            });
           } else {
-            await api.tasks.create(task);
+            response = await this.$store.dispatch('tasks/create', task);
           }
-          this.$router.go(-1);
+
+          if (response.error) {
+            this.error = 'Something went wrong. Please try again.';
+          } else {
+            this.$router.go(-1);
+          }
         }
       },
       onBack() {
