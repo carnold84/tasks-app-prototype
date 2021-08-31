@@ -37,6 +37,9 @@
   /* Date Time Picker */
   --c_dateTimePicker_bgColor: var(--neutral3);
   --c_dateTimePicker_color: var(--text3);
+  --c_dateTimePicker_icon_fill: var(--text6);
+  --c_dateTimePicker_mainText_color: var(--text3);
+  --c_dateTimePicker_subText_color: var(--text3);
   --c_dateTimePicker_header_bgColor: var(--neutral5);
   --c_dateTimePicker_item_color: var(--text1);
   --c_dateTimePicker_actions_bgColor: var(--neutral5);
@@ -86,9 +89,11 @@
   --c_textDisplay_subText_color: var(--text4);
 
   /* Text Field */
+  --c_textField_icon_fill: var(--text5);
   --c_textField_label_color: var(--text5);
   --c_textField_field_bgColor: var(--neutral3);
-  --c_textField_field_borderColor: var(--neutral3);
+  --c_textField_field_borderColor: var(--neutral5);
+  --c_textField_field_borderColor__focus: var(--neutral8);
   --c_textField_field_color: var(--text2);
   --c_textField_field_borderColor__focus: var(--neutral7);
   --c_textField_error_color: var(--textError);

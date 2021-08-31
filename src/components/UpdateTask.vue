@@ -34,7 +34,6 @@
     data() {
       return {
         dueDate: this.task.dueDate,
-        isLoading: false,
         isSaving: false,
         notes: this.task.notes,
         title: this.task.title,

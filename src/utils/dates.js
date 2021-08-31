@@ -32,7 +32,7 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
-export const formatRelative = (date) => {
+export const formatRelative = (date, withTime = false) => {
   const targetDate = DateTime.fromISO(date);
   const start = DateTime.now().startOf('day');
 
@@ -41,17 +41,26 @@ export const formatRelative = (date) => {
   const { days } = diffInMonths.values;
 
   let formattedDate;
+  const time = formatTime(date);
 
   if (days <= 1) {
     formattedDate = capitalizeFirstLetter(targetDate.toRelativeCalendar());
+
+    if (withTime) {
+      formattedDate = `${formattedDate}, ${time}`;
+    }
   }
 
   if (days > 1 && days <= 7) {
     formattedDate = `${targetDate.toFormat('cccc')}`;
+
+    if (withTime) {
+      formattedDate = `${formattedDate}, ${time}`;
+    }
   }
 
   if (days > 7) {
-    formattedDate = formatFull(date, false);
+    formattedDate = formatFull(date, withTime);
   }
 
   return formattedDate;

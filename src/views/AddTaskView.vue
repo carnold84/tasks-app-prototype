@@ -5,16 +5,19 @@
       <text-field
         v-model="title"
         :isRequired="true"
+        id="title"
         label="Title"
         style="margin: 0 0 15px;"
       />
       <date-time-picker
         v-model="dueDate"
-        label="Due Date"
+        id="dueDate"
+        placeholder="Due Date"
         style="margin: 0 0 15px;"
       />
       <text-field
         v-model="notes"
+        id="note"
         label="Notes"
         style="height: 150px;"
         type="textArea"

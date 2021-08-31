@@ -28,10 +28,20 @@ export default {
 
       commit('load', tasks);
     },
-    async update({ commit }, payload) {
+    async update({ commit, state }, payload) {
+      const task = state.tasks.byId[payload.id];
+
+      // update the task optimistically
+      commit('update', {
+        ...task,
+        ...payload,
+      });
+
       const response = await api.tasks.update(payload);
 
       if (response.error) {
+        // put it back how it was
+        commit('update', task);
         return response.error;
       } else {
         commit('update', response.data);
