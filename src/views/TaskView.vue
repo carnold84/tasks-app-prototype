@@ -55,7 +55,7 @@
       </icon-link>
     </template>
     <template v-if="task" v-slot:task-bar-right-content>
-      <icon-button :isSecondary="true" @click="deleteTask">
+      <icon-button :isSecondary="true" @click="onDelete">
         <svg
           width="24"
           height="24"
@@ -113,9 +113,9 @@
       },
     },
     methods: {
-      async deleteTask() {
+      onDelete() {
         if (this.id) {
-          await this.$store.dispatch('tasks/delete', this.id);
+          this.$store.dispatch('tasks/delete', this.id);
 
           this.$router.go(-1);
         }

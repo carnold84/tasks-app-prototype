@@ -13,10 +13,15 @@ export default {
         return response.data;
       }
     },
-    async delete({ commit }, payload) {
+    async delete({ commit, state }, payload) {
+      const task = state.tasks.byId[payload];
+      commit('remove', payload);
+
       const response = await api.tasks.delete(payload);
 
       if (response.error) {
+        // restore deleted task
+        commit('add', task);
         return response.error;
       } else {
         commit('remove', response.data.id);
