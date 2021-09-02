@@ -40,7 +40,7 @@
       </text-field>
     </div>
     <template v-slot:task-bar-left-content>
-      <icon-link to="/">
+      <icon-link :isSecondary="true" to="/">
         <svg
           width="20"
           height="20"
@@ -57,8 +57,8 @@
     <template v-if="task" v-slot:task-bar-right-content>
       <icon-button :isSecondary="true" @click="onDelete">
         <svg
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

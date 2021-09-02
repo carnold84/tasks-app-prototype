@@ -24,7 +24,7 @@
       />
     </div>
     <template v-slot:task-bar-left-content>
-      <icon-button @click="onBack">
+      <icon-button :isSecondary="true" @click="onBack">
         <svg
           width="20"
           height="20"

@@ -129,15 +129,36 @@
     font-family: 'IBM Plex Sans', sans-serif;
   }
 
-  .vdatetime-popup__header,
-  .vdatetime-calendar__month__day--selected > span > span,
-  .vdatetime-calendar__month__day--selected:hover > span > span {
+  .vdatetime-popup__header {
     background-color: var(--c_dateTimePicker_header_bgColor);
+    color: var(--c_dateTimePicker_header_color);
+  }
+
+  .vdatetime-calendar__month__day:hover > span > span {
+    background-color: var(--c_dateTimePicker_monthDay__hover_bgColor);
+  }
+
+  .vdatetime-calendar__month__day--selected > span > span {
+    background-color: var(--c_dateTimePicker_monthDay__selected_bgColor);
+  }
+
+  .vdatetime-calendar__month__day--selected:hover > span > span {
+    background-color: var(--c_dateTimePicker_monthDay__selected__hover_bgColor);
   }
 
   .vdatetime-month-picker__item--selected,
   .vdatetime-time-picker__item--selected {
     color: var(--c_dateTimePicker_item_color);
+  }
+
+  .vdatetime-calendar__navigation--previous svg path,
+  .vdatetime-calendar__navigation--next svg path {
+    stroke: var(--c_dateTimePicker_navigation_button_stroke);
+  }
+
+  .vdatetime-calendar__navigation--previous:hover svg path,
+  .vdatetime-calendar__navigation--next:hover svg path {
+    stroke: var(--c_dateTimePicker_navigation_button__hover_stroke);
   }
 
   .vdatetime-popup__actions {

@@ -1,5 +1,6 @@
 .theme-default:root {
   --primary1: #9310c7;
+  --primary2: #7f10ac;
   --neutral1: #1b1c1d;
   --neutral2: #212325;
   --neutral3: #262a2c;
@@ -44,24 +45,50 @@
   --c_dateTimePicker_mainText_color: var(--text3);
   --c_dateTimePicker_subText_color: var(--text3);
   --c_dateTimePicker_header_bgColor: var(--neutral5);
-  --c_dateTimePicker_item_color: var(--text1);
+  --c_dateTimePicker_header_color: var(--text1);
+  --c_dateTimePicker_monthDay_color: var(--text1);
+  --c_dateTimePicker_monthDay__selected_bgColor: var(--primary1);
+  --c_dateTimePicker_monthDay__selected__hover_bgColor: var(--primary2);
+  --c_dateTimePicker_monthDay__hover_bgColor: var(--neutral6);
+  --c_dateTimePicker_navigation_button_stroke: var(--text4);
+  --c_dateTimePicker_navigation_button__hover_stroke: var(--text2);
   --c_dateTimePicker_actions_bgColor: var(--neutral5);
-  --c_dateTimePicker_actions_button_color: var(--text1);
+  --c_dateTimePicker_actions_button_color: var(--text3);
   --c_dateTimePicker_actions_button__hover_color: var(--text1);
   --c_dateTimePicker_list_scrollbar_thumb: var(--neutral8);
   --c_dateTimePicker_list_scrollbar_track: var(--neutral5);
 
   /* Icon Button */
-  --c_iconButton_bgColor: var(--neutral8);
-  --c_iconButton_fill: var(--text3);
-  --c_iconButton__hover_bgColor: var(--neutral10);
+  --c_iconButton_bgColor: var(--primary1);
+  --c_iconButton_borderColor: var(--primary1);
+  --c_iconButton_fill: var(--text1);
+  --c_iconButton__hover_bgColor: var(--primary2);
+  --c_iconButton__hover_borderColor: var(--primary2);
   --c_iconButton__hover_fill: var(--text1);
+  --c_iconButton_secondary_bgColor: var(--neutral4);
+  --c_iconButton_secondary_borderColor: var(--neutral5);
+  --c_iconButton_secondary_fill: var(--text6);
+  --c_iconButton_secondary__hover_bgColor: var(--neutral5);
+  --c_iconButton_secondary__hover_borderColor: var(--neutral8);
+  --c_iconButton_secondary__hover_fill: var(--text5);
 
   /* Icon Link */
   --c_iconLink_bgColor: var(--c_iconButton_bgColor);
+  --c_iconLink_borderColor: var(--c_iconButton_borderColor);
   --c_iconLink_fill: var(--c_iconButton_fill);
   --c_iconLink__hover_bgColor: var(--c_iconButton__hover_bgColor);
+  --c_iconLink__hover_borderColor: var(--c_iconButton__hover_borderColor);
   --c_iconLink__hover_fill: var(--c_iconButton__hover_fill);
+  --c_iconLink_secondary_bgColor: var(--c_iconButton_secondary_bgColor);
+  --c_iconLink_secondary_borderColor: var(--c_iconButton_secondary_borderColor);
+  --c_iconLink_secondary_fill: var(--c_iconButton_secondary_fill);
+  --c_iconLink_secondary__hover_bgColor: var(
+    --c_iconButton_secondary__hover_bgColor
+  );
+  --c_iconLink_secondary__hover_borderColor: var(
+    --c_iconButton_secondary__hover_borderColor
+  );
+  --c_iconLink_secondary__hover_fill: var(--c_iconButton_secondary__hover_fill);
 
   /* List Item */
   --c_listItem_bgColor: var(--neutral3);
@@ -96,9 +123,8 @@
   --c_textField_label_color: var(--text5);
   --c_textField_field_bgColor: var(--neutral3);
   --c_textField_field_borderColor: var(--neutral5);
-  --c_textField_field_borderColor__focus: var(--neutral8);
-  --c_textField_field_color: var(--text2);
   --c_textField_field_borderColor__focus: var(--neutral7);
+  --c_textField_field_color: var(--text2);
   --c_textField_error_color: var(--textError);
 
   /* Toast */
