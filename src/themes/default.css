@@ -1,4 +1,5 @@
 .theme-default:root {
+  --primary1: #9310c7;
   --neutral1: #1b1c1d;
   --neutral2: #212325;
   --neutral3: #262a2c;
@@ -16,6 +17,8 @@
   --text5: #7d8991;
   --text6: #5c6b75;
   --textError: #d6766a;
+  --error1: #a70008;
+  --warn1: #bf5800;
 
   /*------------------------------------------------
     Components
@@ -97,4 +100,10 @@
   --c_textField_field_color: var(--text2);
   --c_textField_field_borderColor__focus: var(--neutral7);
   --c_textField_error_color: var(--textError);
+
+  /* Toast */
+  --c_toast_icon_bgColor_error: var(--error1);
+  --c_toast_icon_bgColor_info: var(--primary1);
+  --c_toast_icon_bgColor_warn: var(--warn1);
+  --c_toast_icon_color: var(--text1);
 }

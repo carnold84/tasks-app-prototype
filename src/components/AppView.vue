@@ -74,7 +74,9 @@
   .c_app_view.over-leave-active {
     transition: transform 400ms ease-in-out;
   }
-  .c_app_view.over-enter, .c_app_view.over-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+  .c_app_view.over-enter,
+  .c_app_view.over-leave-to {
     transform: translateY(calc(100% + 20px));
   }
 

@@ -121,31 +121,38 @@
         }
       },
       async onDueDateInput(value) {
-        clearTimeout(this.dueDateTimeout);
-        console.log(value);
-
-        this.dueDateTimeout = setTimeout(() => {
-          this.updateDueDate();
+        if (value !== this.dueDate) {
           clearTimeout(this.dueDateTimeout);
-        }, 500);
+          console.log(value);
+          this.dueDate = value;
+
+          this.dueDateTimeout = setTimeout(() => {
+            this.updateDueDate();
+            clearTimeout(this.dueDateTimeout);
+          }, 500);
+        }
       },
       async onNotesInput(value) {
-        clearTimeout(this.notesTimeout);
-        this.notes = value;
-
-        this.notesTimeout = setTimeout(() => {
-          this.updateNotes();
+        if (value !== this.notes) {
           clearTimeout(this.notesTimeout);
-        }, 500);
+          this.notes = value;
+
+          this.notesTimeout = setTimeout(() => {
+            this.updateNotes();
+            clearTimeout(this.notesTimeout);
+          }, 500);
+        }
       },
       async onTitleInput(value) {
-        clearTimeout(this.titleTimeout);
-        this.title = value;
-
-        this.titleTimeout = setTimeout(() => {
-          this.updateTitle(this.title);
+        if (value !== this.title) {
           clearTimeout(this.titleTimeout);
-        }, 500);
+          this.title = value;
+
+          this.titleTimeout = setTimeout(() => {
+            this.updateTitle(this.title);
+            clearTimeout(this.titleTimeout);
+          }, 500);
+        }
       },
       async updateDueDate() {
         await this.$store.dispatch('tasks/update', {

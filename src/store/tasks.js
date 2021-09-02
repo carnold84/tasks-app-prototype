@@ -3,23 +3,39 @@ import api from '../api';
 
 export default {
   actions: {
-    async create({ commit }, payload) {
+    async create({ commit, dispatch }, payload) {
       const response = await api.tasks.create(payload);
 
       if (response.error) {
+        dispatch(
+          'toasts/add',
+          {
+            text: `${payload.title} couldn't be created.`,
+            type: 'error',
+          },
+          { root: true }
+        );
         return response.error;
       } else {
         commit('add', response.data);
         return response.data;
       }
     },
-    async delete({ commit, state }, payload) {
+    async delete({ commit, dispatch, state }, payload) {
       const task = state.tasks.byId[payload];
       commit('remove', payload);
 
       const response = await api.tasks.delete(payload);
 
       if (response.error) {
+        dispatch(
+          'toasts/add',
+          {
+            text: `${task.title} couldn't be deleted.`,
+            type: 'error',
+          },
+          { root: true }
+        );
         // restore deleted task
         commit('add', task);
         return response.error;
@@ -33,18 +49,28 @@ export default {
 
       commit('load', tasks);
     },
-    async update({ commit, state }, payload) {
+    async update({ commit, dispatch, state }, payload) {
       const task = state.tasks.byId[payload.id];
-
-      // update the task optimistically
-      commit('update', {
+      const updatedTask = {
         ...task,
         ...payload,
-      });
+      };
+
+      // update the task optimistically
+      commit('update', updatedTask);
 
       const response = await api.tasks.update(payload);
 
       if (response.error) {
+        dispatch(
+          'toasts/add',
+          {
+            text: `${updatedTask.title} couldn't be updated.`,
+            type: 'error',
+          },
+          { root: true }
+        );
+
         // put it back how it was
         commit('update', task);
         return response.error;

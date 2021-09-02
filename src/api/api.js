@@ -21,7 +21,7 @@ const request = (callback) => {
       } catch (err) {
         reject(err);
       }
-    }, 2000);
+    }, 500);
   });
 };
 
