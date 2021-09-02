@@ -12,16 +12,16 @@
         @input="onTitleInput"
       />
       <date-time-picker
-        v-model="dueDate"
         id="dueDate"
         style="margin: 0 0 15px;"
+        :value="dueDate"
         @input="onDueDateInput"
       />
       <text-field
-        v-model="notes"
         id="notes"
         placeholder="No notes"
         type="textarea"
+        :value="notes"
         @input="onNotesInput"
       >
         <template v-slot:icon>
@@ -122,54 +122,54 @@
       },
       async onDueDateInput(value) {
         if (value !== this.dueDate) {
-          clearTimeout(this.dueDateTimeout);
-          console.log(value);
-          this.dueDate = value;
+          if (this.dueDateTimeout) {
+            clearTimeout(this.dueDateTimeout);
+          }
 
           this.dueDateTimeout = setTimeout(() => {
-            this.updateDueDate();
-            clearTimeout(this.dueDateTimeout);
+            this.dueDate = value;
+            this.updateDueDate(this.dueDate);
           }, 500);
         }
       },
       async onNotesInput(value) {
         if (value !== this.notes) {
-          clearTimeout(this.notesTimeout);
-          this.notes = value;
+          if (this.notesTimeout) {
+            clearTimeout(this.notesTimeout);
+          }
 
           this.notesTimeout = setTimeout(() => {
-            this.updateNotes();
-            clearTimeout(this.notesTimeout);
+            this.notes = value;
+            this.updateNotes(this.notes);
           }, 500);
         }
       },
       async onTitleInput(value) {
         if (value !== this.title) {
-          clearTimeout(this.titleTimeout);
-          this.title = value;
+          if (this.titleTimeout) {
+            clearTimeout(this.titleTimeout);
+          }
 
           this.titleTimeout = setTimeout(() => {
+            this.title = value;
             this.updateTitle(this.title);
-            clearTimeout(this.titleTimeout);
           }, 500);
         }
       },
-      async updateDueDate() {
-        await this.$store.dispatch('tasks/update', {
+      async updateDueDate(dueDate) {
+        this.$store.dispatch('tasks/update', {
           id: this.id,
-          dueDate: this.dueDate,
+          dueDate,
         });
       },
-      async updateNotes() {
-        console.log('updateNotes', this.notes);
-        await this.$store.dispatch('tasks/update', {
+      async updateNotes(notes) {
+        this.$store.dispatch('tasks/update', {
           id: this.id,
-          notes: this.notes,
+          notes,
         });
       },
       async updateTitle(title) {
-        console.log(title);
-        await this.$store.dispatch('tasks/update', {
+        this.$store.dispatch('tasks/update', {
           id: this.id,
           title,
         });

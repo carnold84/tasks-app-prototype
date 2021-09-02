@@ -6,7 +6,7 @@
         `${label}${isRequired ? '*' : ''}`
       }}</label>
       <textarea
-        v-if="type === 'textArea'"
+        v-if="type === 'textarea'"
         v-model="inputVal"
         @blur="onBlur"
         @focus="onFocus"
@@ -102,6 +102,9 @@
         this.isValid = isValid;
       },
     },
+    mounted() {
+      console.log(this.type, this.id);
+    },
     computed: {
       inputVal: {
         get() {
@@ -164,6 +167,7 @@
 
   .c_text_field textarea.field {
     flex-grow: 1;
+    min-height: 90px;
   }
 
   .c_text_field .field:focus {

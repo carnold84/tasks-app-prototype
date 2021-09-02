@@ -23,10 +23,11 @@
       </div>
     </div>
     <datetime
-      v-model="localValue"
       input-class="input"
       ref="dateTime"
       type="datetime"
+      :value="value"
+      @input="onInput"
     ></datetime>
   </div>
 </template>
@@ -67,14 +68,6 @@
       formattedValue() {
         return this.value ? formatFull(this.value) : null;
       },
-      localValue: {
-        get() {
-          return this.value;
-        },
-        set(value) {
-          this.$emit('input', value);
-        },
-      },
       relativeValue() {
         return this.value ? formatRelative(this.value, true) : null;
       },
@@ -82,6 +75,9 @@
     methods: {
       onClick() {
         this.$refs.dateTime.isOpen = true;
+      },
+      onInput(value) {
+        this.$emit('input', value);
       },
     },
   };
