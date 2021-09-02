@@ -102,9 +102,6 @@
         this.isValid = isValid;
       },
     },
-    mounted() {
-      console.log(this.type, this.id);
-    },
     computed: {
       inputVal: {
         get() {
