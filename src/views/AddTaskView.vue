@@ -1,5 +1,5 @@
 <template>
-  <app-view :is-stacked="true" :title="id ? 'Update Task' : 'Add Task'">
+  <app-view :is-stacked="true" title="Add Task">
     <message-screen v-if="isSaving">Saving...</message-screen>
     <div v-else>
       <text-field
@@ -73,21 +73,12 @@
       MessageScreen,
     },
     data() {
-      const id = this.$route?.params?.id;
-      const task = this.$store.getters['tasks/getById'](id);
-
       return {
-        dueDate: task?.dueDate ?? undefined,
-        isLoading: false,
+        dueDate: undefined,
         isSaving: false,
-        notes: task?.notes ?? '',
-        title: task?.title ?? '',
+        notes: '',
+        title: '',
       };
-    },
-    computed: {
-      id() {
-        return this.$route?.params?.id;
-      },
     },
     methods: {
       async onAdd() {
@@ -100,19 +91,12 @@
             title: this.title,
           };
 
-          let response;
+          let response = await this.$store.dispatch('tasks/create', task);
 
-          if (this.id) {
-            response = await this.$store.dispatch('tasks/update', {
-              ...task,
-              id: this.id,
-            });
-          } else {
-            response = await this.$store.dispatch('tasks/create', task);
-          }
+          console.log(response);
 
           if (response.error) {
-            this.error = 'Something went wrong. Please try again.';
+            this.isSaving = false;
           } else {
             this.$router.go(-1);
           }

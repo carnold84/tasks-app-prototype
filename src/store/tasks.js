@@ -15,7 +15,9 @@ export default {
           },
           { root: true }
         );
-        return response.error;
+        return {
+          error: response.error,
+        };
       } else {
         commit('add', response.data);
         return response.data;
