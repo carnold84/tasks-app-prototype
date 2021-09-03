@@ -123,14 +123,13 @@
 
 <style scoped>
   .c_text_field {
-    align-items: center;
     display: flex;
   }
 
   .c_text_field /deep/ svg {
     fill: var(--c_textField_icon_fill);
     height: 20px;
-    margin: 0 10px 0 0;
+    margin: 5px 10px 0 0;
     width: 20px;
   }
 

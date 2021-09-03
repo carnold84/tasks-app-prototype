@@ -1,7 +1,10 @@
 <template>
   <button
     @click="$emit('click')"
-    :class="[{ 'is-secondary': isSecondary }, 'c_icon_button']"
+    :class="[
+      { 'is-disabled': isDisabled, 'is-secondary': isSecondary },
+      'c_icon_button',
+    ]"
   >
     <slot />
   </button>
@@ -47,6 +50,16 @@
     fill: var(--c_iconButton__hover_fill);
   }
 
+  .c_icon_button.is-disabled {
+    background-color: var(--c_iconButton__disabled_bgColor);
+    border: 1px solid var(--c_iconButton__disabled_borderColor);
+    pointer-events: none;
+  }
+
+  .c_icon_button.is-disabled /deep/ svg {
+    fill: var(--c_iconButton__disabled_fill);
+  }
+
   .c_icon_button.is-secondary {
     background-color: var(--c_iconButton_secondary_bgColor);
     border: 1px solid var(--c_iconButton_secondary_borderColor);
@@ -63,5 +76,15 @@
 
   .c_icon_button.is-secondary:hover /deep/ svg {
     fill: var(--c_iconButton_secondary__hover_fill);
+  }
+
+  .c_icon_button.is-secondary.is-disabled {
+    background-color: var(--c_iconButton_secondary__disabled_bgColor);
+    border: 1px solid var(--c_iconButton_secondary__disabled_borderColor);
+    pointer-events: none;
+  }
+
+  .c_icon_button.is-secondary.is-disabled /deep/ svg {
+    fill: var(--c_iconButton_secondary__disabled_fill);
   }
 </style>

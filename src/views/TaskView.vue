@@ -5,24 +5,21 @@
     </message-screen>
     <div v-else>
       <text-field
+        v-model="title"
         id="title"
         :is-large="true"
         style="margin: 0 0 15px;"
-        :value="title"
-        @input="onTitleInput"
       />
       <date-time-picker
+        v-model="dueDate"
         id="dueDate"
         style="margin: 0 0 15px;"
-        :value="dueDate"
-        @input="onDueDateInput"
       />
       <text-field
+        v-model="notes"
         id="notes"
         placeholder="No notes"
         type="textarea"
-        :value="notes"
-        @input="onNotesInput"
       >
         <template v-slot:icon>
           <svg
@@ -54,6 +51,25 @@
         </svg>
       </icon-link>
     </template>
+    <template v-slot:task-bar-center-content>
+      <icon-button
+        class="save-btn"
+        :isDisabled="!hasChanges"
+        @click="onSaveChanges"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9.52495 17.657L4.57495 12.707L5.98895 11.293L9.64295 14.943L9.52495 14.828L18.01 6.343L19.424 7.757L10.939 16.243L9.52595 17.656L9.52495 17.657Z"
+          />
+        </svg>
+      </icon-button>
+    </template>
     <template v-if="task" v-slot:task-bar-right-content>
       <icon-button :isSecondary="true" @click="onDelete">
         <svg
@@ -79,6 +95,7 @@
   import MessageScreen from '../components/MessageScreen.vue';
   import DateTimePicker from '../components/DateTimePicker.vue';
   import TextField from '../components/TextField.vue';
+  import Vue from 'vue';
 
   export default {
     name: 'ViewTask',
@@ -95,16 +112,20 @@
       const task = this.$store.getters['tasks/getById'](id);
 
       return {
+        changed: {},
         dueDate: task?.dueDate,
-        dueDateTimeout: null,
-        isEditing: false,
         notes: task?.notes,
-        notesTimeout: null,
+        originalTask: { ...task },
         title: task?.title,
-        titleTimeout: null,
       };
     },
     computed: {
+      hasChanges() {
+        console.log(
+          this.changed.dueDate || this.changed.notes || this.changed.title
+        );
+        return this.changed.dueDate || this.changed.notes || this.changed.title;
+      },
       id() {
         return this.$route?.params?.id;
       },
@@ -120,67 +141,50 @@
           this.$router.go(-1);
         }
       },
-      async onDueDateInput(value) {
-        if (value !== this.dueDate) {
-          if (this.dueDateTimeout) {
-            clearTimeout(this.dueDateTimeout);
-          }
-
-          this.dueDateTimeout = setTimeout(() => {
-            this.dueDate = value;
-            this.updateDueDate(this.dueDate);
-          }, 500);
-        }
-      },
-      async onNotesInput(value) {
-        if (value !== this.notes) {
-          if (this.notesTimeout) {
-            clearTimeout(this.notesTimeout);
-          }
-
-          this.notesTimeout = setTimeout(() => {
-            this.notes = value;
-            this.updateNotes(this.notes);
-          }, 500);
-        }
-      },
-      async onTitleInput(value) {
-        if (value !== this.title) {
-          if (this.titleTimeout) {
-            clearTimeout(this.titleTimeout);
-          }
-
-          this.titleTimeout = setTimeout(() => {
-            this.title = value;
-            this.updateTitle(this.title);
-          }, 500);
-        }
-      },
-      async updateDueDate(dueDate) {
+      onSaveChanges() {
+        console.log('save');
         this.$store.dispatch('tasks/update', {
           id: this.id,
-          dueDate,
+          dueDate: this.dueDate,
+          notes: this.notes,
+          title: this.title,
         });
-      },
-      async updateNotes(notes) {
-        this.$store.dispatch('tasks/update', {
-          id: this.id,
-          notes,
-        });
-      },
-      async updateTitle(title) {
-        this.$store.dispatch('tasks/update', {
-          id: this.id,
-          title,
-        });
+        this.$router.go(-1);
       },
     },
     watch: {
+      dueDate(newValue) {
+        Vue.set(
+          this.changed,
+          'dueDate',
+          newValue !== this.originalTask.dueDate
+        );
+      },
+      notes(newValue) {
+        Vue.set(this.changed, 'notes', newValue !== this.originalTask.notes);
+      },
       task() {
         this.dueDate = this.task?.dueDate;
         this.notes = this.task?.notes;
         this.title = this.task?.title;
+        this.originalTask = {
+          ...this.task,
+        };
+      },
+      title(newValue) {
+        Vue.set(this.changed, 'title', newValue !== this.originalTask.title);
       },
     },
   };
 </script>
+
+<style scoped>
+  .save-btn {
+    height: 60px;
+    left: 50%;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 60px;
+  }
+</style>

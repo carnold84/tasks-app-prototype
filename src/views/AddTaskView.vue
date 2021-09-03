@@ -83,23 +83,15 @@
     methods: {
       async onAdd() {
         if (this.title !== '') {
-          this.isSaving = true;
-
           const task = {
             dueDate: this.dueDate,
             notes: this.notes,
             title: this.title,
           };
 
-          let response = await this.$store.dispatch('tasks/create', task);
+          this.$store.dispatch('tasks/create', task);
 
-          console.log(response);
-
-          if (response.error) {
-            this.isSaving = false;
-          } else {
-            this.$router.go(-1);
-          }
+          this.$router.go(-1);
         }
       },
       onBack() {

@@ -47,6 +47,16 @@
     fill: var(--c_iconLink__hover_fill);
   }
 
+  .c_icon_button.is-disabled {
+    background-color: var(--c_iconLink__disabled_bgColor);
+    border: 1px solid var(--c_iconLink__disabled_borderColor);
+    pointer-events: none;
+  }
+
+  .c_icon_button.is-disabled /deep/ svg {
+    fill: var(--c_iconLink__disabled_fill);
+  }
+
   .c_icon_link.is-secondary {
     background-color: var(--c_iconLink_secondary_bgColor);
     border: 1px solid var(--c_iconLink_secondary_borderColor);
@@ -63,5 +73,15 @@
 
   .c_icon_link.is-secondary:hover /deep/ svg {
     fill: var(--c_iconLink_secondary__hover_fill);
+  }
+
+  .c_icon_button.is-secondary.is-disabled {
+    background-color: var(--c_iconLink_secondary__disabled_bgColor);
+    border: 1px solid var(--c_iconLink_secondary__disabled_borderColor);
+    pointer-events: none;
+  }
+
+  .c_icon_button.is-secondary.is-disabled /deep/ svg {
+    fill: var(--c_iconLink_secondary__disabled_fill);
   }
 </style>
