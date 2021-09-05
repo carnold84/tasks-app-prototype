@@ -117,6 +117,7 @@
   }
 
   .c_app_view .header {
+    align-items: center;
     background-color: var(--c_app_view_header_bgColor);
     background-size: 10px 10px;
     background-image: var(--c_app_view_header_bgImage);
@@ -125,7 +126,7 @@
     flex-direction: column;
     flex-shrink: 0;
     height: 50%;
-    justify-content: flex-end;
+    justify-content: center;
     padding: 20px 20px 15px;
     position: sticky;
     top: 0;

@@ -7,33 +7,30 @@
       <c-typography class="title" component="h2" variant="h2">
         Sign In
       </c-typography>
-      <ul v-if="errors.length > 0">
-        <li v-for="error of errors" :key="error">{{ error }}</li>
+      <ul v-if="errors.length > 0" class="errors">
+        <li v-for="error of errors" class="error-item" :key="error">
+          {{ error }}
+        </li>
       </ul>
       <form @submit.prevent="onSubmit" class="form">
-        <text-field v-model="email" class="field" type="text" />
-        <text-field v-model="password" class="field" type="password" />
-        <icon-button>
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.52495 17.657L4.57495 12.707L5.98895 11.293L9.64295 14.943L9.52495 14.828L18.01 6.343L19.424 7.757L10.939 16.243L9.52595 17.656L9.52495 17.657Z"
-            />
-          </svg>
-        </icon-button>
+        <text-field v-model="email" class="field" id="email" type="text" />
+        <text-field
+          v-model="password"
+          class="field"
+          id="password"
+          type="password"
+        />
+        <c-button>
+          Sign In
+        </c-button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
+  import CButton from '../components/CButton.vue';
   import CTypography from '../components/CTypography.vue';
-  import IconButton from '../components/IconButton.vue';
   import MessageScreen from '../components/MessageScreen.vue';
   import TextField from '../components/TextField.vue';
 
@@ -41,9 +38,9 @@
     name: 'SignInView',
     components: {
       TextField,
-      IconButton,
       CTypography,
       MessageScreen,
+      CButton,
     },
     data() {
       return {
@@ -73,8 +70,6 @@
             password: this.password,
           });
 
-          console.log(response);
-
           if (response.error) {
             this.isLoading = false;
             this.errors.push('Email or password is incorrect.');
@@ -90,7 +85,7 @@
 <style scoped>
   .sign-in-view {
     align-items: center;
-    background-color: var(--neutral1);
+    background-color: var(--v_signIn_bgColor);
     display: flex;
     height: 100%;
     position: absolute;
@@ -99,11 +94,11 @@
 
   .container {
     align-items: flex-end;
-    background-color: var(--neutral2);
-    border: 1px solid var(--neutral4);
+    background-color: var(--v_signIn_content_bgColor);
+    border: 1px solid var(--v_signIn_content_borderColor);
     display: flex;
     flex-direction: column;
-    margin: 0 20px;
+    margin: 0 30px;
     max-width: 400px;
     min-height: 220px;
     padding: 20px;
@@ -123,8 +118,25 @@
     width: 100%;
   }
 
+  .errors {
+    background-color: var(--v_signIn_errors_bgColor);
+    border-radius: 3px;
+    display: flex;
+    list-style: none;
+    margin: 0 0 20px;
+    padding: 8px 12px;
+    width: 100%;
+  }
+
+  .error-item {
+    color: var(--v_signIn_errors_item_color);
+    font-size: 1.3rem;
+    margin: 0;
+    padding: 0;
+  }
+
   .field {
-    margin: 0 0 15px;
+    margin: 0 0 20px;
     width: 100%;
   }
 </style>

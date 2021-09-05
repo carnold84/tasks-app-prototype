@@ -17,11 +17,21 @@
   --text4: #9da6ac;
   --text5: #7d8991;
   --text6: #5c6b75;
-  --textError: #d6766a;
-  --error1: #a70008;
+  --textError: #ff656d;
+  --error1: #c1272f;
   --warn1: #bf5800;
 
   --app_bg: var(--neutral1);
+
+  /*------------------------------------------------
+    Views
+  ------------------------------------------------*/
+
+  --v_signIn_bgColor: var(--neutral1);
+  --v_signIn_content_bgColor: var(--neutral3);
+  --v_signIn_content_borderColor: var(--neutral5);
+  --v_signIn_errors_bgColor: var(--error1);
+  --v_signIn_errors_item_color: var(--text1);
 
   /*------------------------------------------------
     Components
@@ -51,11 +61,11 @@
   --c_button__disabled_bgColor: var(--neutral5);
   --c_button__disabled_borderColor: var(--neutral5);
   --c_button__disabled_color: var(--text6);
-  --c_button_secondary_bgColor: var(--neutral4);
-  --c_button_secondary_borderColor: var(--neutral8);
+  --c_button_secondary_bgColor: var(--neutral5);
+  --c_button_secondary_borderColor: var(--neutral5);
   --c_button_secondary_color: var(--text3);
-  --c_button_secondary__hover_bgColor: var(--neutral6);
-  --c_button_secondary__hover_borderColor: var(--neutral10);
+  --c_button_secondary__hover_bgColor: var(--neutral7);
+  --c_button_secondary__hover_borderColor: var(--neutral7);
   --c_button_secondary__hover_color: var(--text1);
   --c_button_secondary__disabled_bgColor: var(--neutral3);
   --c_button_secondary__disabled_borderColor: var(--neutral5);
