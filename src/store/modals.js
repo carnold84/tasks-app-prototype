@@ -33,17 +33,8 @@ const modals = {
   namespaced: true,
   state: {
     modals: {
-      all: ['1'],
-      byId: {
-        '1': {
-          id: '1',
-          onAccept() {
-            console.log('accepted');
-          },
-          text: 'This is modal text.',
-          title: 'This is a modal title',
-        },
-      },
+      all: [],
+      byId: {},
     },
   },
 };

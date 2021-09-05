@@ -39,6 +39,26 @@
   --c_app_view_title_color: var(--text2);
   --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
 
+  /* Icon Button */
+  --c_button_bgColor: var(--primary1);
+  --c_button_borderColor: var(--primary1);
+  --c_button_color: var(--text1);
+  --c_button__hover_bgColor: var(--primary2);
+  --c_button__hover_borderColor: var(--primary2);
+  --c_button__hover_color: var(--text1);
+  --c_button__disabled_bgColor: var(--neutral5);
+  --c_button__disabled_borderColor: var(--neutral5);
+  --c_button__disabled_color: var(--text6);
+  --c_button_secondary_bgColor: var(--neutral4);
+  --c_button_secondary_borderColor: var(--neutral8);
+  --c_button_secondary_color: var(--text3);
+  --c_button_secondary__hover_bgColor: var(--neutral6);
+  --c_button_secondary__hover_borderColor: var(--neutral10);
+  --c_button_secondary__hover_color: var(--text1);
+  --c_button_secondary__disabled_bgColor: var(--neutral3);
+  --c_button_secondary__disabled_borderColor: var(--neutral5);
+  --c_button_secondary__disabled_color: var(--neutral8);
+
   /* Date Time Picker */
   --c_dateTimePicker_bgColor: var(--neutral1);
   --c_dateTimePicker_color: var(--text3);
