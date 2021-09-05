@@ -136,9 +136,15 @@
     methods: {
       onDelete() {
         if (this.id) {
-          this.$store.dispatch('tasks/delete', this.id);
+          this.$store.dispatch('modals/add', {
+            text: `Are you sure you want to delete the task ${this.task.title}?`,
+            title: `Delete ${this.task.title}?`,
+            onAccept: () => {
+              this.$store.dispatch('tasks/delete', this.id);
 
-          this.$router.go(-1);
+              this.$router.go(-1);
+            },
+          });
         }
       },
       onSaveChanges() {

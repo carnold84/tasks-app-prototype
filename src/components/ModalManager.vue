@@ -51,9 +51,13 @@
   .c_modal_manager {
     bottom: 0;
     left: 0;
-    height: 100%;
     position: absolute;
     width: 100%;
     z-index: 1;
+  }
+
+  .modal-enter-active,
+  .modal-leave-active {
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
   }
 </style>

@@ -1,19 +1,21 @@
 <template>
   <div class="c_modal">
     <div class="modal">
-      <c-typography class="title" component="h2" variant="h3">
-        {{ title }}
-      </c-typography>
-      <c-typography class="text">
-        {{ title }}
-      </c-typography>
+      <div class="content">
+        <c-typography v-if="title" class="title" component="h2" variant="h5">
+          {{ title }}
+        </c-typography>
+        <c-typography class="text">
+          {{ message }}
+        </c-typography>
+      </div>
       <div class="buttons">
-        <button class="btn" @click="$emit('accept', id)">
-          {{ acceptText }}
-        </button>
-        <button class="btn" @click="$emit('cancel', id)">
+        <c-button :is-secondary="true" @click="$emit('cancel', id)">
           {{ declineText }}
-        </button>
+        </c-button>
+        <c-button @click="$emit('accept', id)">
+          {{ acceptText }}
+        </c-button>
       </div>
     </div>
     <div class="overlay" />
@@ -21,10 +23,11 @@
 </template>
 
 <script>
+  import CButton from './CButton.vue';
   import CTypography from './CTypography.vue';
 
   export default {
-    components: { CTypography },
+    components: { CTypography, CButton },
     name: 'CModal',
     props: {
       acceptText: {
@@ -66,7 +69,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     height: 100%;
     left: 0;
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     z-index: 0;
@@ -74,7 +77,7 @@
 
   .c_modal.modal-enter-active .overlay,
   .c_modal.modal-leave-active .overlay {
-    transition: opacity 400ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
   }
 
   .c_modal.modal-enter .overlay,
@@ -83,15 +86,18 @@
   }
 
   .c_modal .modal {
-    background-color: var(--neutral1);
-    padding: 20px;
+    background-color: var(--neutral3);
     width: 100%;
     z-index: 1;
   }
 
+  .c_modal .content {
+    padding: 30px;
+  }
+
   .c_modal.modal-enter-active .modal,
   .c_modal.modal-leave-active .modal {
-    transition: transform 400ms ease-in-out;
+    transition: transform 300ms ease-in-out;
   }
 
   .c_modal.modal-enter .modal,
@@ -100,16 +106,26 @@
   }
 
   .c_modal .title {
-    margin: 0;
+    margin: 0 0 5px;
   }
 
   .c_modal .text {
     margin: 0;
   }
 
-  .c_modal .button {
+  .c_modal .buttons {
     align-items: center;
     display: flex;
     justify-content: flex-end;
+    padding: 0 20px 20px;
+    width: 100%;
+  }
+
+  .c_modal .buttons > * {
+    margin: 0 0 0 10px;
+  }
+
+  .c_modal .buttons > *:first-child {
+    margin: 0;
   }
 </style>
