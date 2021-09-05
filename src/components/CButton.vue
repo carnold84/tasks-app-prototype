@@ -1,19 +1,27 @@
 <template>
-  <button
-    @click="$emit('click')"
+  <component
     :class="[
       { 'is-disabled': isDisabled, 'is-secondary': isSecondary },
       'c_button',
     ]"
+    :is="component"
+    :to="to"
+    @click="$emit('click')"
   >
     <slot />
-  </button>
+  </component>
 </template>
 
 <script>
   export default {
     name: 'CButton',
     props: {
+      component: {
+        default() {
+          return 'button';
+        },
+        type: [Object, String],
+      },
       isDisabled: {
         default: false,
         type: Boolean,
@@ -21,6 +29,10 @@
       isSecondary: {
         default: false,
         type: Boolean,
+      },
+      to: {
+        default: undefined,
+        type: [Object, String],
       },
     },
   };

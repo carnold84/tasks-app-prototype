@@ -1,16 +1,25 @@
 <template>
-  <router-link
-    :class="[{ 'is-secondary': isSecondary }, 'c_icon_link']"
+  <c-button
+    class="c_icon_link"
+    component="router-link"
+    :isDisabled="isDisabled"
+    :isSecondary="isSecondary"
     :to="to"
   >
     <slot />
-  </router-link>
+  </c-button>
 </template>
 
 <script>
+  import CButton from './CButton.vue';
   export default {
+    components: { CButton },
     name: 'ActionLink',
     props: {
+      isDisabled: {
+        default: false,
+        type: Boolean,
+      },
       isSecondary: {
         default: false,
         type: Boolean,
@@ -25,63 +34,9 @@
 
 <style scoped>
   .c_icon_link {
-    align-items: center;
-    background-color: var(--c_iconLink_bgColor);
-    border: 1px solid var(--c_iconLink_borderColor);
     border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-  }
-
-  .c_icon_link /deep/ svg {
-    fill: var(--c_iconLink_fill);
-  }
-
-  .c_icon_link:hover {
-    background-color: var(--c_iconLink__hover_bgColor);
-  }
-
-  .c_icon_link:hover /deep/ svg {
-    fill: var(--c_iconLink__hover_fill);
-  }
-
-  .c_icon_button.is-disabled {
-    background-color: var(--c_iconLink__disabled_bgColor);
-    border: 1px solid var(--c_iconLink__disabled_borderColor);
-    pointer-events: none;
-  }
-
-  .c_icon_button.is-disabled /deep/ svg {
-    fill: var(--c_iconLink__disabled_fill);
-  }
-
-  .c_icon_link.is-secondary {
-    background-color: var(--c_iconLink_secondary_bgColor);
-    border: 1px solid var(--c_iconLink_secondary_borderColor);
-  }
-
-  .c_icon_link.is-secondary /deep/ svg {
-    fill: var(--c_iconLink_secondary_fill);
-  }
-
-  .c_icon_link.is-secondary:hover {
-    background-color: var(--c_iconLink_secondary__hover_bgColor);
-    border: 1px solid var(--c_iconLink_secondary__hover_borderColor);
-  }
-
-  .c_icon_link.is-secondary:hover /deep/ svg {
-    fill: var(--c_iconLink_secondary__hover_fill);
-  }
-
-  .c_icon_button.is-secondary.is-disabled {
-    background-color: var(--c_iconLink_secondary__disabled_bgColor);
-    border: 1px solid var(--c_iconLink_secondary__disabled_borderColor);
-    pointer-events: none;
-  }
-
-  .c_icon_button.is-secondary.is-disabled /deep/ svg {
-    fill: var(--c_iconLink_secondary__disabled_fill);
+    height: 40px;
+    padding: 0;
+    width: 40px;
   }
 </style>

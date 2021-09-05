@@ -21,7 +21,7 @@
       </template>
     </ul>
     <template v-slot:task-bar-center-content>
-      <icon-link class="add-btn" to="/add-task">
+      <action-button component="router-link" to="/add-task">
         <svg
           width="24"
           height="24"
@@ -31,7 +31,7 @@
         >
           <path d="M13 13V19H11V13H5V11H11V5H13V11H19V13H13Z" />
         </svg>
-      </icon-link>
+      </action-button>
     </template>
     <template v-slot:task-bar-right-content>
       <select-menu
@@ -69,21 +69,21 @@
 <script>
   import { formatFull, formatRelative, getStartOfDay } from '../utils/dates';
   import ListItem from '../components/ListItem.vue';
-  import IconLink from '../components/IconLink.vue';
   import AppView from '../components/AppView.vue';
   import ListSubHeader from '../components/ListSubHeader.vue';
   import MessageScreen from '../components/MessageScreen.vue';
   import SelectMenu from '../components/SelectMenu.vue';
+  import ActionButton from '../components/ActionButton.vue';
 
   export default {
     name: 'HomeView',
     components: {
       AppView,
-      IconLink,
       ListItem,
       ListSubHeader,
       MessageScreen,
       SelectMenu,
+      ActionButton,
     },
     props: {
       isDisabled: {
