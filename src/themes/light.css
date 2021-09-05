@@ -21,13 +21,15 @@
   --error1: #a70008;
   --warn1: #bf5800;
 
+  --app_bg: var(--neutral5);
+
   /*------------------------------------------------
     Components
   ------------------------------------------------*/
 
   /* App View */
   --c_app_view_bgColor: var(--neutral5);
-  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.2);
   --c_app_view_header_bgColor: var(--primary1);
   --c_app_view_header_bgImage: repeating-linear-gradient(
     45deg,
@@ -36,8 +38,8 @@
     var(--c_app_view_header_bgColor) 0,
     var(--c_app_view_header_bgColor) 50%
   );
+  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.2);
   --c_app_view_title_color: var(--text2);
-  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
 
   /* Icon Button */
   --c_button_bgColor: var(--primary1);

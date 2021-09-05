@@ -5,8 +5,8 @@
       'c_app_view',
     ]"
   >
-    <div class="body">
-      <div class="header">
+    <div class="body" ref="body">
+      <div class="header" ref="header" :style="{ top: `${headerTop}px` }">
         <c-typography component="h2" style="margin: 0;" variant="h2">
           {{ title }}
         </c-typography>
@@ -36,6 +36,11 @@
   export default {
     components: { TaskBar, CTypography },
     name: 'AppView',
+    data() {
+      return {
+        headerTop: 0,
+      };
+    },
     props: {
       isDisabled: {
         default: false,
@@ -48,6 +53,23 @@
       title: {
         required: true,
         type: String,
+      },
+    },
+    mounted() {
+      const resizeObserver = new ResizeObserver(() => {
+        this.onResize();
+      });
+
+      resizeObserver.observe(this.$refs.body);
+    },
+    methods: {
+      getHeaderHeight() {
+        const bounds = this.$refs?.header?.getBoundingClientRect();
+
+        return bounds ? 70 - bounds.height : this.headerTop;
+      },
+      onResize() {
+        this.headerTop = this.getHeaderHeight();
       },
     },
   };
@@ -65,7 +87,7 @@
   }
 
   .c_app_view.is-stacked {
-    filter: drop-shadow(--c_app_view_dropShadow);
+    filter: drop-shadow(var(--c_app_view_dropShadow));
     height: calc(100% - 25px);
     top: 25px;
   }
@@ -104,7 +126,10 @@
     flex-shrink: 0;
     height: 50%;
     justify-content: flex-end;
-    padding: 20px;
+    padding: 20px 20px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
   }
 
   .c_app_view .content {

@@ -25,9 +25,6 @@
         return this.$store.getters['modals/getAll'];
       },
     },
-    mounted() {
-      console.log(this.modals);
-    },
     methods: {
       onAccept({ id, onAccept }) {
         this.$store.dispatch('modals/remove', id);

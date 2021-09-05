@@ -119,9 +119,6 @@
     },
     computed: {
       hasChanges() {
-        console.log(
-          this.changed.dueDate || this.changed.notes || this.changed.title
-        );
         return this.changed.dueDate || this.changed.notes || this.changed.title;
       },
       id() {

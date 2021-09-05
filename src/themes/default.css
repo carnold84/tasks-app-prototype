@@ -21,6 +21,8 @@
   --error1: #a70008;
   --warn1: #bf5800;
 
+  --app_bg: var(--neutral1);
+
   /*------------------------------------------------
     Components
   ------------------------------------------------*/
@@ -36,6 +38,7 @@
     var(--neutral3) 0,
     var(--neutral3) 50%
   );
+  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
   --c_app_view_title_color: var(--text1);
 
   /* Icon Button */
