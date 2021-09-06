@@ -30,6 +30,7 @@
   --v_signIn_bgColor: var(--neutral1);
   --v_signIn_content_bgColor: var(--neutral3);
   --v_signIn_content_borderColor: var(--neutral5);
+  --c_signIn_content_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
   --v_signIn_errors_bgColor: var(--error1);
   --v_signIn_errors_item_color: var(--text1);
 

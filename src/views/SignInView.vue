@@ -97,6 +97,7 @@
     background-color: var(--v_signIn_content_bgColor);
     border: 1px solid var(--v_signIn_content_borderColor);
     display: flex;
+    filter: drop-shadow(var(--c_signIn_content_dropShadow));
     flex-direction: column;
     margin: 0 30px;
     max-width: 400px;

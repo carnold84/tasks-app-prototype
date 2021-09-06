@@ -27,9 +27,10 @@
     Views
   ------------------------------------------------*/
 
-  --v_signIn_bgColor: var(--neutral1);
-  --v_signIn_content_bgColor: var(--neutral3);
+  --v_signIn_bgColor: var(--neutral3);
+  --v_signIn_content_bgColor: var(--neutral1);
   --v_signIn_content_borderColor: var(--neutral5);
+  --c_signIn_content_dropShadow: 0 0 3px rgba(0, 0, 0, 0.05);
   --v_signIn_errors_bgColor: var(--error1);
   --v_signIn_errors_item_color: var(--text1);
 
@@ -39,7 +40,7 @@
 
   /* App View */
   --c_app_view_bgColor: var(--neutral3);
-  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.05);
   --c_app_view_header_bgColor: var(--neutral1);
   --c_app_view_header_bgImage: repeating-linear-gradient(
     45deg,
@@ -48,7 +49,7 @@
     var(--c_app_view_header_bgColor) 0,
     var(--c_app_view_header_bgColor) 50%
   );
-  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.05);
   --c_app_view_title_color: var(--text2);
 
   /* Icon Button */
@@ -145,7 +146,7 @@
 
   /* Task Bar */
   --c_taskBar_bgColor: var(--neutral1);
-  --c_taskBar_dropShadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  --c_taskBar_dropShadow: 0 0 4px rgba(0, 0, 0, 0.05);
 
   /* Text Display */
   --c_textDisplay_icon_fill: var(--text5);
