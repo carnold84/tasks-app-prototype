@@ -1,15 +1,13 @@
 import { DateTime } from 'luxon';
 
-export const getStartOfDay = (date) => {
-  let datetime;
+export const addOneDay = (date) => {
+  const datetime = DateTime.fromISO(date).plus({ days: 1 });
 
-  if (date) {
-    datetime = DateTime.fromISO(date);
-  } else {
-    datetime = DateTime.now();
-  }
+  return datetime.toISO();
+};
 
-  return datetime.startOf('day').toString();
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 export const formatTime = (date) => {
@@ -26,10 +24,6 @@ export const formatFull = (date, withTime = true) => {
   }
 
   return DateTime.fromISO(date).toFormat('cccc d LLLL yy');
-};
-
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 export const formatRelative = (date, withTime = false) => {
@@ -64,4 +58,16 @@ export const formatRelative = (date, withTime = false) => {
   }
 
   return formattedDate;
+};
+
+export const getStartOfDay = (date) => {
+  let datetime;
+
+  if (date) {
+    datetime = DateTime.fromISO(date);
+  } else {
+    datetime = DateTime.now();
+  }
+
+  return datetime.startOf('day').toString();
 };

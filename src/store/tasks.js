@@ -1,8 +1,55 @@
 import Vue from 'vue';
 import api from '../api';
+import { addOneDay, formatRelative } from '../utils/dates';
 
 export default {
   actions: {
+    async addOneDay({ commit, dispatch, state }, payload) {
+      const task = state.tasks.byId[payload];
+      const nextDueDate = addOneDay(task.dueDate);
+      const updatedTask = {
+        ...task,
+        dueDate: nextDueDate,
+      };
+
+      // update the task optimistically
+      commit('update', updatedTask);
+
+      dispatch(
+        'toasts/add',
+        {
+          text: `${updatedTask.title} was moved to ${formatRelative(
+            updatedTask.dueDate
+          )}.`,
+          timeout: 3000,
+          type: 'info',
+        },
+        { root: true }
+      );
+
+      const response = await api.tasks.update({
+        dueDate: nextDueDate,
+        id: updatedTask.id,
+      });
+
+      if (response.error) {
+        dispatch(
+          'toasts/add',
+          {
+            text: `${updatedTask.title} couldn't be updated.`,
+            type: 'error',
+          },
+          { root: true }
+        );
+
+        // put it back how it was
+        commit('update', task);
+        return response.error;
+      } else {
+        commit('update', response.data);
+        return response.data;
+      }
+    },
     async create({ commit, dispatch }, payload) {
       const response = await api.tasks.create(payload);
 

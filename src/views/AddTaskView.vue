@@ -24,7 +24,7 @@
       />
     </div>
     <template v-slot:task-bar-left-content>
-      <icon-button :isSecondary="true" @click="onBack">
+      <c-icon-button :isSecondary="true" @click="onBack">
         <svg
           width="20"
           height="20"
@@ -36,7 +36,7 @@
             d="M15.535 3.515L7.04999 12L15.535 20.485L16.95 19.071L9.87799 12L16.95 4.929L15.535 3.515Z"
           />
         </svg>
-      </icon-button>
+      </c-icon-button>
     </template>
     <template v-slot:task-bar-center-content>
       <action-button :is-disabled="title === ''" @click="onAdd">
@@ -60,7 +60,7 @@
   import ActionButton from '../components/ActionButton.vue';
   import AppView from '../components/AppView.vue';
   import DateTimePicker from '../components/DateTimePicker.vue';
-  import IconButton from '../components/IconButton.vue';
+  import CIconButton from '../components/CIconButton.vue';
   import MessageScreen from '../components/MessageScreen.vue';
   import TextField from '../components/TextField.vue';
 
@@ -69,7 +69,7 @@
     components: {
       AppView,
       DateTimePicker,
-      IconButton,
+      CIconButton,
       TextField,
       MessageScreen,
       ActionButton,

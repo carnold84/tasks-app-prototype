@@ -67,7 +67,7 @@
       </action-button>
     </template>
     <template v-if="task" v-slot:task-bar-right-content>
-      <icon-button :isSecondary="true" @click="onDelete">
+      <c-icon-button :isSecondary="true" @click="onDelete">
         <svg
           width="18"
           height="18"
@@ -79,7 +79,7 @@
             d="M17 22H7C5.89543 22 5 21.1046 5 20V7H3V5H7V4C7 2.89543 7.89543 2 9 2H15C16.1046 2 17 2.89543 17 4V5H21V7H19V20C19 21.1046 18.1046 22 17 22ZM7 7V20H17V7H7ZM9 4V5H15V4H9Z"
           />
         </svg>
-      </icon-button>
+      </c-icon-button>
     </template>
   </app-view>
 </template>
@@ -87,7 +87,7 @@
 <script>
   import Vue from 'vue';
   import IconLink from '../components/IconLink.vue';
-  import IconButton from '../components/IconButton.vue';
+  import CIconButton from '../components/CIconButton.vue';
   import AppView from '../components/AppView.vue';
   import MessageScreen from '../components/MessageScreen.vue';
   import DateTimePicker from '../components/DateTimePicker.vue';
@@ -98,7 +98,7 @@
     name: 'ViewTask',
     components: {
       AppView,
-      IconButton,
+      CIconButton,
       IconLink,
       MessageScreen,
       DateTimePicker,

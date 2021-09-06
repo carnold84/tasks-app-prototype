@@ -6,6 +6,9 @@
         subTitle
       }}</c-typography>
     </router-link>
+    <div class="controls">
+      <slot name="controls" />
+    </div>
   </li>
 </template>
 
@@ -14,7 +17,7 @@
 
   export default {
     components: { CTypography },
-    name: 'ListItem',
+    name: 'CListItem',
     props: {
       subTitle: String,
       title: {
@@ -72,5 +75,9 @@
     fill: var(--c_listItem_action_fill);
     height: 20px;
     width: 20px;
+  }
+
+  .c_list-item .controls {
+    padding: 0 15px;
   }
 </style>
