@@ -5,10 +5,13 @@
       'c_app_view',
     ]"
   >
-    <div class="body" ref="body">
-      <div class="header" ref="header">
+    <div class="body" ref="body" @scroll="onScroll">
+      <div
+        :class="['header', { is_minimised: isTitleMinimised }]"
+        :style="{ '--header_inner_height': isTitleMinimised ? '60px' : '94px' }"
+      >
         <div class="header_inner">
-          <c-typography component="h2" style="margin: 0;" variant="h2">
+          <c-typography class="title" component="h2" variant="h2">
             {{ title }}
           </c-typography>
         </div>
@@ -40,7 +43,7 @@
     name: 'AppView',
     data() {
       return {
-        headerTop: 0,
+        isTitleMinimised: false,
       };
     },
     props: {
@@ -55,6 +58,17 @@
       title: {
         required: true,
         type: String,
+      },
+    },
+    methods: {
+      onScroll() {
+        const scrollTop = this.$refs.body.scrollTop;
+
+        if (scrollTop >= 180) {
+          this.isTitleMinimised = true;
+        } else {
+          this.isTitleMinimised = false;
+        }
       },
     },
   };
@@ -103,12 +117,11 @@
 
   .c_app_view .header {
     --header_outer_height: 50%;
-    --header_inner_height: 70px;
     --header_height_difference: calc(
       var(--header_outer_height) - var(--header_inner_height)
     );
 
-    align-items: center;
+    align-items: flex-end;
     background-color: var(--c_app_view_header_bgColor);
     background-size: 10px 10px;
     background-image: var(--c_app_view_header_bgImage);
@@ -125,9 +138,11 @@
     align-items: center;
     display: flex;
     height: var(--header_inner_height);
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 0 20px;
     position: sticky;
     top: 0;
+    transition: all 200ms ease-in-out;
     width: 100%;
   }
 
@@ -141,9 +156,15 @@
 
   .c_app_view .title {
     color: var(--c_app_view_title_color);
+    font-size: 6rem;
+    font-weight: 200;
+    margin: 0;
+    transition: font-size 200ms ease-in-out;
+  }
+
+  .c_app_view .is_minimised .title {
     font-size: 2.8rem;
-    font-weight: 400;
-    line-height: 2.2rem;
+    font-weight: 200;
     margin: 0;
   }
 </style>
