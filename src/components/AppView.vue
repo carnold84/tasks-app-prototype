@@ -6,10 +6,12 @@
     ]"
   >
     <div class="body" ref="body">
-      <div class="header" ref="header" :style="{ top: `${headerTop}px` }">
-        <c-typography component="h2" style="margin: 0;" variant="h2">
-          {{ title }}
-        </c-typography>
+      <div class="header" ref="header">
+        <div class="header_inner">
+          <c-typography component="h2" style="margin: 0;" variant="h2">
+            {{ title }}
+          </c-typography>
+        </div>
       </div>
       <div class="content">
         <slot />
@@ -53,23 +55,6 @@
       title: {
         required: true,
         type: String,
-      },
-    },
-    mounted() {
-      const resizeObserver = new ResizeObserver(() => {
-        this.onResize();
-      });
-
-      resizeObserver.observe(this.$refs.body);
-    },
-    methods: {
-      getHeaderHeight() {
-        const bounds = this.$refs?.header?.getBoundingClientRect();
-
-        return bounds ? 70 - bounds.height : this.headerTop;
-      },
-      onResize() {
-        this.headerTop = this.getHeaderHeight();
       },
     },
   };
@@ -117,20 +102,33 @@
   }
 
   .c_app_view .header {
+    --header_outer_height: 50%;
+    --header_inner_height: 70px;
+    --header_height_difference: calc(
+      var(--header_outer_height) - var(--header_inner_height)
+    );
+
     align-items: center;
     background-color: var(--c_app_view_header_bgColor);
     background-size: 10px 10px;
     background-image: var(--c_app_view_header_bgImage);
     display: flex;
     filter: drop-shadow(var(--c_app_view_header_dropShadow));
-    flex-direction: column;
     flex-shrink: 0;
-    height: 50%;
+    height: var(--header_outer_height);
+    position: sticky;
+    top: calc(var(--header_height_difference) * -1);
+    z-index: 1;
+  }
+
+  .c_app_view .header_inner {
+    align-items: center;
+    display: flex;
+    height: var(--header_inner_height);
     justify-content: center;
-    padding: 20px 20px 15px;
     position: sticky;
     top: 0;
-    z-index: 1;
+    width: 100%;
   }
 
   .c_app_view .content {
