@@ -10,6 +10,12 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
+export const getNowUTC = () => {
+  return DateTime.now()
+    .toUTC()
+    .toString();
+};
+
 export const formatTime = (date) => {
   const datetime = DateTime.fromISO(date);
 

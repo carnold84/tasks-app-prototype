@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
+import { getNowUTC } from '../utils/dates';
 
 const getState = async () => {
   const response = await localStorage.getItem('task_app');
@@ -31,9 +31,9 @@ const api = {
       return await request(async () => {
         const nextTask = {
           ...data,
-          created: DateTime.now().toString(),
+          created: getNowUTC(),
           id: uuidv4(),
-          updated: DateTime.now().toString(),
+          updated: getNowUTC(),
         };
 
         const state = await getState();
@@ -94,7 +94,7 @@ const api = {
             updatedTask = {
               ...task,
               ...data,
-              updated: DateTime.now().toString(),
+              updated: getNowUTC(),
             };
             return updatedTask;
           }

@@ -52,7 +52,7 @@
   --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
   --c_app_view_title_color: var(--text1);
 
-  /* Icon Button */
+  /* Button */
   --c_button_bgColor: var(--primary1);
   --c_button_borderColor: var(--primary1);
   --c_button_color: var(--text1);
@@ -130,8 +130,8 @@
   --c_textField_error_color: var(--textError);
 
   /* Toast */
-  --c_toast_icon_bgColor_error: var(--error1);
-  --c_toast_icon_bgColor_info: var(--primary1);
-  --c_toast_icon_bgColor_warn: var(--warn1);
-  --c_toast_icon_color: var(--text1);
+  --c_toast_bgColor_error: var(--error1);
+  --c_toast_bgColor_info: var(--primary1);
+  --c_toast_bgColor_warn: var(--warn1);
+  --c_toast_color: var(--text1);
 }

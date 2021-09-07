@@ -45,15 +45,15 @@
   }
 
   .c_toast.is_error {
-    background-color: var(--c_toast_icon_bgColor_error);
+    background-color: var(--c_toast_bgColor_error);
   }
 
   .c_toast.is_info {
-    background-color: var(--c_toast_icon_bgColor_info);
+    background-color: var(--c_toast_bgColor_info);
   }
 
   .c_toast.is_warn {
-    background-color: var(--c_toast_icon_bgColor_warn);
+    background-color: var(--c_toast_bgColor_warn);
   }
 
   .c_toast .close_btn {
@@ -62,7 +62,7 @@
     border: none;
     cursor: pointer;
     display: flex;
-    fill: #ffffff;
+    fill: var(--c_toast_color);
     height: 40px;
     justify-content: center;
     padding: 0;

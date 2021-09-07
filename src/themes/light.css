@@ -52,7 +52,7 @@
   --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.05);
   --c_app_view_title_color: var(--text2);
 
-  /* Icon Button */
+  /* Button */
   --c_button_bgColor: var(--primary1);
   --c_button_borderColor: var(--primary1);
   --c_button_color: var(--text1);
@@ -62,11 +62,11 @@
   --c_button__disabled_bgColor: var(--neutral5);
   --c_button__disabled_borderColor: var(--neutral5);
   --c_button__disabled_color: var(--text6);
-  --c_button_secondary_bgColor: var(--neutral3);
-  --c_button_secondary_borderColor: var(--neutral3);
+  --c_button_secondary_bgColor: var(--neutral5);
+  --c_button_secondary_borderColor: var(--neutral5);
   --c_button_secondary_color: var(--text3);
-  --c_button_secondary__hover_bgColor: var(--neutral5);
-  --c_button_secondary__hover_borderColor: var(--neutral5);
+  --c_button_secondary__hover_bgColor: var(--neutral7);
+  --c_button_secondary__hover_borderColor: var(--neutral7);
   --c_button_secondary__hover_color: var(--text1);
   --c_button_secondary__disabled_bgColor: var(--neutral3);
   --c_button_secondary__disabled_borderColor: var(--neutral5);
@@ -160,4 +160,10 @@
   --c_textField_field_borderColor__focus: var(--primary2);
   --c_textField_field_color: var(--text2);
   --c_textField_error_color: var(--textError);
+
+  /* Toast */
+  --c_toast_bgColor_error: var(--error1);
+  --c_toast_bgColor_info: var(--primary1);
+  --c_toast_bgColor_warn: var(--warn1);
+  --c_toast_color: var(--text1);
 }
