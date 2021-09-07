@@ -1,18 +1,26 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e89d4f73b0952cd97dbe",
-    "url": "/tasks-app-prototype/css/app.4a34ae19.css"
+    "revision": "469941bbc1e56d18305a",
+    "url": "/tasks-app-prototype/css/app.cf109b05.css"
   },
   {
     "revision": "91348c5d762636d80264",
     "url": "/tasks-app-prototype/css/chunk-vendors.e5419b3b.css"
   },
   {
-    "revision": "216f5d9978973e4425f6332b22d0cc06",
+    "revision": "a91ebb31cddf6f4f81775263eecaa8b3",
+    "url": "/tasks-app-prototype/favicon.png"
+  },
+  {
+    "revision": "5e3ae8264f99ec0d97b6c30fa960387b",
+    "url": "/tasks-app-prototype/img/logo.png"
+  },
+  {
+    "revision": "aba3d97482ca716e0c454b9251f783b4",
     "url": "/tasks-app-prototype/index.html"
   },
   {
-    "revision": "e89d4f73b0952cd97dbe",
+    "revision": "469941bbc1e56d18305a",
     "url": "/tasks-app-prototype/js/app.a801e18d.js"
   },
   {
@@ -20,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tasks-app-prototype/js/chunk-vendors.6b61d949.js"
   },
   {
-    "revision": "80d1240fa3f443cb4e487f11c9f78c7e",
+    "revision": "3a31ad0ce2ec627dc511fe8c075a0de4",
     "url": "/tasks-app-prototype/manifest.json"
   },
   {
