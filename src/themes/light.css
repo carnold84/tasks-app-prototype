@@ -1,6 +1,6 @@
 .theme-light:root {
-  --primary1: #f9c83e;
-  --primary2: #ebba34;
+  --primary1: #ae27e4;
+  --primary2: #9417c5;
   --neutral1: #ffffff;
   --neutral2: #f9f9f9;
   --neutral3: #f3f3f3;
@@ -55,10 +55,10 @@
   /* Button */
   --c_button_bgColor: var(--primary1);
   --c_button_borderColor: var(--primary1);
-  --c_button_color: var(--text1);
+  --c_button_color: #ffffff;
   --c_button__hover_bgColor: var(--primary2);
   --c_button__hover_borderColor: var(--primary2);
-  --c_button__hover_color: var(--text1);
+  --c_button__hover_color: #ffffff;
   --c_button__disabled_bgColor: var(--neutral5);
   --c_button__disabled_borderColor: var(--neutral5);
   --c_button__disabled_color: var(--text6);
