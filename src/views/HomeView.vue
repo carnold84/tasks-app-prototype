@@ -8,20 +8,35 @@
     </message-screen>
     <ul v-else class="list">
       <template v-for="item of items">
-        <list-sub-header v-if="item.type === 'section-header'" :key="item.id">
+        <c-list-sub-header v-if="item.type === 'section-header'" :key="item.id">
           {{ item.label }}
-        </list-sub-header>
-        <list-item
+        </c-list-sub-header>
+        <c-list-item
           v-else
           :key="item.id"
           :subTitle="formatDueDate(item.dueDate)"
           :title="item.title"
           :to="`/task/${item.id}`"
-        />
+        >
+          <template v-if="item.dueDate" v-slot:controls>
+            <c-icon-button :isSecondary="true" @click="onNextDay(item.id)">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19 22H5C3.89543 22 3 21.1046 3 20V6C3 4.89543 3.89543 4 5 4H7V2H9V4H15V2H17V4H19C20.1046 4 21 4.89543 21 6V20C21 21.1046 20.1046 22 19 22ZM5 10V20H19V10H5ZM5 6V8H19V6H5ZM13 18H11V16H9V14H11V12H13V14H15V16H13V18Z"
+                />
+              </svg>
+            </c-icon-button>
+          </template>
+        </c-list-item>
       </template>
     </ul>
     <template v-slot:task-bar-center-content>
-      <icon-link class="add-btn" to="/add-task">
+      <action-button component="router-link" to="/add-task">
         <svg
           width="24"
           height="24"
@@ -31,7 +46,7 @@
         >
           <path d="M13 13V19H11V13H5V11H11V5H13V11H19V13H13Z" />
         </svg>
-      </icon-link>
+      </action-button>
     </template>
     <template v-slot:task-bar-right-content>
       <select-menu
@@ -67,34 +82,86 @@
 </template>
 
 <script>
-  import api from '../api';
   import { formatFull, formatRelative, getStartOfDay } from '../utils/dates';
-  import ListItem from '../components/ListItem.vue';
-  import IconLink from '../components/IconLink.vue';
   import AppView from '../components/AppView.vue';
-  import ListSubHeader from '../components/ListSubHeader.vue';
+  import CListItem from '../components/CListItem.vue';
+  import CListSubHeader from '../components/CListSubHeader.vue';
   import MessageScreen from '../components/MessageScreen.vue';
   import SelectMenu from '../components/SelectMenu.vue';
+  import ActionButton from '../components/ActionButton.vue';
+  import CIconButton from '../components/CIconButton.vue';
 
   export default {
     name: 'HomeView',
     components: {
       AppView,
-      IconLink,
-      ListItem,
-      ListSubHeader,
+      CIconButton,
+      CListItem,
+      CListSubHeader,
       MessageScreen,
       SelectMenu,
+      ActionButton,
     },
     props: {
       isDisabled: {
         type: Boolean,
       },
     },
-    data() {
-      return {
-        items: undefined,
-      };
+    computed: {
+      items() {
+        if (this.tasks) {
+          let items = [];
+          const daysLookup = {};
+          const noDueDate = [];
+
+          // group by day
+          this.tasks.forEach((task) => {
+            if (task.dueDate) {
+              const startOfDay = getStartOfDay(task.dueDate);
+
+              if (daysLookup[startOfDay] === undefined) {
+                daysLookup[startOfDay] = [];
+              }
+              daysLookup[startOfDay].push(task);
+            } else {
+              noDueDate.push(task);
+            }
+          });
+
+          // convert lookup to array and sort by key (day)
+          const days = Object.entries(daysLookup).sort(([keyA], [keyB]) => {
+            return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
+          });
+
+          // add tasks to items array with section headers
+          for (const [day, tasks] of days) {
+            items.push({
+              label: formatRelative(day),
+              type: 'section-header',
+            });
+            tasks.sort(function(a, b) {
+              return a.dueDate < b.dueDate ? -1 : a.dueDate > b.dueDate ? 1 : 0;
+            });
+            items.push(...tasks);
+          }
+
+          // add section for no due date
+          if (noDueDate.length > 0) {
+            items.push({
+              label: 'No Reminder',
+              type: 'section-header',
+            });
+            items.push(...noDueDate);
+          }
+
+          return items;
+        }
+
+        return undefined;
+      },
+      tasks() {
+        return this.$store.getters['tasks/getAll'];
+      },
     },
     methods: {
       formatDueDate(date) {
@@ -102,72 +169,20 @@
           return formatFull(date);
         }
       },
-      async loadTasks() {
-        const tasks = await api.tasks.getAll();
-        let items = [];
-        const daysLookup = {};
-        const noDueDate = [];
-
-        // group by day
-        tasks.forEach((task) => {
-          if (task.dueDate) {
-            const startOfDay = getStartOfDay(task.dueDate);
-
-            if (daysLookup[startOfDay] === undefined) {
-              daysLookup[startOfDay] = [];
-            }
-            daysLookup[startOfDay].push(task);
-          } else {
-            noDueDate.push(task);
-          }
-        });
-
-        // convert lookup to array and sort by key (day)
-        const days = Object.entries(daysLookup).sort(([keyA], [keyB]) => {
-          return keyA < keyB ? -1 : keyA > keyB ? 1 : 0;
-        });
-
-        // add tasks to items array with section headers
-        for (const [day, tasks] of days) {
-          items.push({
-            label: formatRelative(day),
-            type: 'section-header',
-          });
-          tasks.sort(function(a, b) {
-            return a.dueDate < b.dueDate ? -1 : a.dueDate > b.dueDate ? 1 : 0;
-          });
-          items.push(...tasks);
-        }
-
-        // add section for no due date
-        if (noDueDate.length > 0) {
-          items.push({
-            label: 'No Reminder',
-            type: 'section-header',
-          });
-          items.push(...noDueDate);
-        }
-
-        this.items = items;
+      onNextDay(id) {
+        this.$store.dispatch('tasks/addOneDay', id);
       },
       async onSelect(id) {
         if (id === 'theme') {
-          this.$store.dispatch('toggleTheme');
+          this.$store.dispatch('theme/toggle');
         } else if (id === 'sign-out') {
-          await api.users.signOut();
+          await this.$store.dispatch('auth/signOut');
           this.$router.push('/sign-in');
         }
       },
     },
     async mounted() {
-      this.loadTasks();
-    },
-    watch: {
-      isDisabled(value) {
-        if (value === false) {
-          this.loadTasks();
-        }
-      },
+      this.$store.dispatch('tasks/load');
     },
   };
 </script>
@@ -179,14 +194,5 @@
     list-style: none;
     margin: 0;
     padding: 0 0 15px;
-  }
-
-  .add-btn {
-    height: 60px;
-    left: 50%;
-    position: absolute;
-    top: 0;
-    transform: translate(-50%, -50%);
-    width: 60px;
   }
 </style>

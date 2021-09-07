@@ -2,15 +2,15 @@
   --primary1: #f9c83e;
   --primary2: #ebba34;
   --neutral1: #ffffff;
-  --neutral2: #f9f9f8;
-  --neutral3: #f4f3f1;
-  --neutral4: #eeecea;
-  --neutral5: #e9e6e3;
-  --neutral6: #e3e0dc;
-  --neutral7: #dedad5;
-  --neutral8: #d8d3ce;
-  --neutral9: #d3cdc7;
-  --neutral10: #cdc7c0;
+  --neutral2: #f9f9f9;
+  --neutral3: #f3f3f3;
+  --neutral4: #ededed;
+  --neutral5: #e7e7e7;
+  --neutral6: #e1e1e1;
+  --neutral7: #dbdbdb;
+  --neutral8: #d5d5d5;
+  --neutral9: #cfcfcf;
+  --neutral10: #c9c9c9;
   --text1: #222222;
   --text2: #3a3a3a;
   --text3: #525252;
@@ -18,15 +18,30 @@
   --text5: #818181;
   --text6: #999999;
   --textError: #d6766a;
+  --error1: #a70008;
+  --warn1: #bf5800;
+
+  --app_bg: var(--neutral5);
+
+  /*------------------------------------------------
+    Views
+  ------------------------------------------------*/
+
+  --v_signIn_bgColor: var(--neutral3);
+  --v_signIn_content_bgColor: var(--neutral1);
+  --v_signIn_content_borderColor: var(--neutral5);
+  --c_signIn_content_dropShadow: 0 0 3px rgba(0, 0, 0, 0.05);
+  --v_signIn_errors_bgColor: var(--error1);
+  --v_signIn_errors_item_color: var(--text1);
 
   /*------------------------------------------------
     Components
   ------------------------------------------------*/
 
   /* App View */
-  --c_app_view_bgColor: var(--neutral5);
-  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
-  --c_app_view_header_bgColor: var(--primary1);
+  --c_app_view_bgColor: var(--neutral3);
+  --c_app_view_dropShadow: 0 0 6px rgba(0, 0, 0, 0.05);
+  --c_app_view_header_bgColor: var(--neutral1);
   --c_app_view_header_bgImage: repeating-linear-gradient(
     45deg,
     rgba(0, 0, 0, 0.03) 0,
@@ -34,34 +49,83 @@
     var(--c_app_view_header_bgColor) 0,
     var(--c_app_view_header_bgColor) 50%
   );
+  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.05);
   --c_app_view_title_color: var(--text2);
-  --c_app_view_header_dropShadow: 0 0 6px rgba(0, 0, 0, 0.5);
+
+  /* Button */
+  --c_button_bgColor: var(--primary1);
+  --c_button_borderColor: var(--primary1);
+  --c_button_color: var(--text1);
+  --c_button__hover_bgColor: var(--primary2);
+  --c_button__hover_borderColor: var(--primary2);
+  --c_button__hover_color: var(--text1);
+  --c_button__disabled_bgColor: var(--neutral5);
+  --c_button__disabled_borderColor: var(--neutral5);
+  --c_button__disabled_color: var(--text6);
+  --c_button_secondary_bgColor: var(--neutral5);
+  --c_button_secondary_borderColor: var(--neutral5);
+  --c_button_secondary_color: var(--text3);
+  --c_button_secondary__hover_bgColor: var(--neutral7);
+  --c_button_secondary__hover_borderColor: var(--neutral7);
+  --c_button_secondary__hover_color: var(--text1);
+  --c_button_secondary__disabled_bgColor: var(--neutral3);
+  --c_button_secondary__disabled_borderColor: var(--neutral5);
+  --c_button_secondary__disabled_color: var(--neutral8);
 
   /* Date Time Picker */
-  --c_dateTimePicker_bgColor: var(--neutral3);
+  --c_dateTimePicker_bgColor: var(--neutral1);
   --c_dateTimePicker_color: var(--text3);
-  --c_dateTimePicker_header_bgColor: var(--neutral5);
-  --c_dateTimePicker_item_color: var(--text1);
-  --c_dateTimePicker_actions_bgColor: var(--neutral5);
-  --c_dateTimePicker_actions_button_color: var(--text1);
+  --c_dateTimePicker_icon_fill: var(--text6);
+  --c_dateTimePicker_mainText_color: var(--text3);
+  --c_dateTimePicker_subText_color: var(--text3);
+  --c_dateTimePicker_header_bgColor: var(--neutral1);
+  --c_dateTimePicker_header_color: var(--text1);
+  --c_dateTimePicker_monthDay_color: var(--text1);
+  --c_dateTimePicker_monthDay__selected_bgColor: var(--primary1);
+  --c_dateTimePicker_monthDay__selected__hover_bgColor: var(--primary2);
+  --c_dateTimePicker_monthDay__hover_bgColor: var(--neutral6);
+  --c_dateTimePicker_navigation_button_stroke: var(--text4);
+  --c_dateTimePicker_navigation_button__hover_stroke: var(--text2);
+  --c_dateTimePicker_actions_bgColor: var(--neutral1);
+  --c_dateTimePicker_actions_button_color: var(--text3);
   --c_dateTimePicker_actions_button__hover_color: var(--text1);
   --c_dateTimePicker_list_scrollbar_thumb: var(--neutral8);
   --c_dateTimePicker_list_scrollbar_track: var(--neutral5);
 
   /* Icon Button */
   --c_iconButton_bgColor: var(--primary1);
+  --c_iconButton_borderColor: var(--primary1);
   --c_iconButton_fill: var(--text1);
   --c_iconButton__hover_bgColor: var(--primary2);
+  --c_iconButton__hover_borderColor: var(--primary2);
   --c_iconButton__hover_fill: var(--text1);
+  --c_iconButton_secondary_bgColor: transparent;
+  --c_iconButton_secondary_borderColor: var(--neutral8);
+  --c_iconButton_secondary_fill: var(--text6);
+  --c_iconButton_secondary__hover_bgColor: transparent;
+  --c_iconButton_secondary__hover_borderColor: var(--text5);
+  --c_iconButton_secondary__hover_fill: var(--text5);
 
   /* Icon Link */
   --c_iconLink_bgColor: var(--c_iconButton_bgColor);
+  --c_iconLink_borderColor: var(--c_iconButton_borderColor);
   --c_iconLink_fill: var(--c_iconButton_fill);
   --c_iconLink__hover_bgColor: var(--c_iconButton__hover_bgColor);
+  --c_iconLink__hover_borderColor: var(--c_iconButton__hover_borderColor);
   --c_iconLink__hover_fill: var(--c_iconButton__hover_fill);
+  --c_iconLink_secondary_bgColor: var(--c_iconButton_secondary_bgColor);
+  --c_iconLink_secondary_borderColor: var(--c_iconButton_secondary_borderColor);
+  --c_iconLink_secondary_fill: var(--c_iconButton_secondary_fill);
+  --c_iconLink_secondary__hover_bgColor: var(
+    --c_iconButton_secondary__hover_bgColor
+  );
+  --c_iconLink_secondary__hover_borderColor: var(
+    --c_iconButton_secondary__hover_borderColor
+  );
+  --c_iconLink_secondary__hover_fill: var(--c_iconButton_secondary__hover_fill);
 
   /* List Item */
-  --c_listItem_bgColor: var(--neutral3);
+  --c_listItem_bgColor: var(--neutral1);
   --c_listItem_title_color: var(--text2);
   --c_listItem_subTitle_color: var(--text4);
   --c_listItem_action_fill: var(--text6);
@@ -81,18 +145,25 @@
   --c_selectMenu_openBtn__hover_fill: var(--text1);
 
   /* Task Bar */
-  --c_taskBar_bgColor: var(--neutral4);
-  --c_taskBar_dropShadow: 0 0 4px rgba(0, 0, 0, 0.1);
+  --c_taskBar_bgColor: var(--neutral1);
+  --c_taskBar_dropShadow: 0 0 4px rgba(0, 0, 0, 0.05);
 
   /* Text Display */
   --c_textDisplay_icon_fill: var(--text5);
   --c_textDisplay_subText_color: var(--text4);
 
   /* Text Field */
+  --c_textField_icon_fill: var(--text5);
   --c_textField_label_color: var(--text5);
   --c_textField_field_bgColor: var(--neutral3);
-  --c_textField_field_borderColor: var(--neutral3);
+  --c_textField_field_borderColor: var(--neutral8);
+  --c_textField_field_borderColor__focus: var(--primary2);
   --c_textField_field_color: var(--text2);
-  --c_textField_field_borderColor__focus: var(--neutral7);
   --c_textField_error_color: var(--textError);
+
+  /* Toast */
+  --c_toast_bgColor_error: var(--error1);
+  --c_toast_bgColor_info: var(--primary1);
+  --c_toast_bgColor_warn: var(--warn1);
+  --c_toast_color: var(--text1);
 }

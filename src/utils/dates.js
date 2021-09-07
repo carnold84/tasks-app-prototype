@@ -1,15 +1,19 @@
 import { DateTime } from 'luxon';
 
-export const getStartOfDay = (date) => {
-  let datetime;
+export const addOneDay = (date) => {
+  const datetime = DateTime.fromISO(date).plus({ days: 1 });
 
-  if (date) {
-    datetime = DateTime.fromISO(date);
-  } else {
-    datetime = DateTime.now();
-  }
+  return datetime.toISO();
+};
 
-  return datetime.startOf('day').toString();
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+export const getNowUTC = () => {
+  return DateTime.now()
+    .toUTC()
+    .toString();
 };
 
 export const formatTime = (date) => {
@@ -28,11 +32,7 @@ export const formatFull = (date, withTime = true) => {
   return DateTime.fromISO(date).toFormat('cccc d LLLL yy');
 };
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-export const formatRelative = (date) => {
+export const formatRelative = (date, withTime = false) => {
   const targetDate = DateTime.fromISO(date);
   const start = DateTime.now().startOf('day');
 
@@ -41,18 +41,39 @@ export const formatRelative = (date) => {
   const { days } = diffInMonths.values;
 
   let formattedDate;
+  const time = formatTime(date);
 
   if (days <= 1) {
     formattedDate = capitalizeFirstLetter(targetDate.toRelativeCalendar());
+
+    if (withTime) {
+      formattedDate = `${formattedDate}, ${time}`;
+    }
   }
 
   if (days > 1 && days <= 7) {
     formattedDate = `${targetDate.toFormat('cccc')}`;
+
+    if (withTime) {
+      formattedDate = `${formattedDate}, ${time}`;
+    }
   }
 
   if (days > 7) {
-    formattedDate = formatFull(date, false);
+    formattedDate = formatFull(date, withTime);
   }
 
   return formattedDate;
+};
+
+export const getStartOfDay = (date) => {
+  let datetime;
+
+  if (date) {
+    datetime = DateTime.fromISO(date);
+  } else {
+    datetime = DateTime.now();
+  }
+
+  return datetime.startOf('day').toString();
 };

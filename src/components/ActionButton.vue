@@ -1,10 +1,12 @@
 <template>
   <c-button
-    class="c_icon_link"
-    component="router-link"
+    v-bind="$props"
+    class="c_action_button"
+    :component="component"
     :isDisabled="isDisabled"
     :isSecondary="isSecondary"
     :to="to"
+    @click="$emit('click')"
   >
     <slot />
   </c-button>
@@ -12,10 +14,17 @@
 
 <script>
   import CButton from './CButton.vue';
+
   export default {
     components: { CButton },
-    name: 'ActionLink',
+    name: 'ActionButton',
     props: {
+      component: {
+        default() {
+          return 'button';
+        },
+        type: [Object, String],
+      },
       isDisabled: {
         default: false,
         type: Boolean,
@@ -25,7 +34,7 @@
         type: Boolean,
       },
       to: {
-        required: true,
+        default: undefined,
         type: [Object, String],
       },
     },
@@ -33,10 +42,14 @@
 </script>
 
 <style scoped>
-  .c_icon_link {
+  .c_action_button {
     border-radius: 50%;
-    height: 40px;
+    height: 60px;
+    left: 50%;
     padding: 0;
-    width: 40px;
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 60px;
   }
 </style>

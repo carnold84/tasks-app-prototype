@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'ListSubHeader',
+    name: 'CListSubHeader',
   };
 </script>
 

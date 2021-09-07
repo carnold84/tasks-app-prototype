@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import api from '../api/api';
+import store from '@/store';
 import MainView from '../views/MainView.vue';
 import SignInView from '../views/SignInView.vue';
 
@@ -47,10 +47,16 @@ const router = new VueRouter({
 let user = null;
 
 router.beforeEach(async (to, from, next) => {
-  if (to.name !== 'SignInView' && !user) {
-    user = await api.users.getUser();
+  if (!user) {
+    user = await store.dispatch('auth/getUser');
 
     if (user) {
+      if (to.name === 'SignInView') {
+        next({ name: 'MainView' });
+      } else {
+        next();
+      }
+    } else if (!user && to.name === 'SignInView') {
       next();
     } else {
       next({ name: 'SignInView' });

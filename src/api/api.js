@@ -1,5 +1,5 @@
-import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';
+import { getNowUTC } from '../utils/dates';
 
 const getState = async () => {
   const response = await localStorage.getItem('task_app');
@@ -21,7 +21,7 @@ const request = (callback) => {
       } catch (err) {
         reject(err);
       }
-    }, 2000);
+    }, 500);
   });
 };
 
@@ -31,9 +31,9 @@ const api = {
       return await request(async () => {
         const nextTask = {
           ...data,
-          created: DateTime.now().toString(),
+          created: getNowUTC(),
           id: uuidv4(),
-          updated: DateTime.now().toString(),
+          updated: getNowUTC(),
         };
 
         const state = await getState();
@@ -42,20 +42,30 @@ const api = {
 
         await setState(state);
 
-        return nextTask;
+        return {
+          data: nextTask,
+        };
       });
     },
     delete: async (id) => {
       return await request(async () => {
         const state = await getState();
+        let deletedTask;
 
         state.tasks = state.tasks.filter((task) => {
-          return task.id !== id;
+          if (task.id !== id) {
+            return true;
+          } else {
+            deletedTask = task;
+            return false;
+          }
         });
 
         await setState(state);
 
-        return id;
+        return {
+          data: deletedTask,
+        };
       });
     },
     getAll: async () => {
@@ -84,7 +94,7 @@ const api = {
             updatedTask = {
               ...task,
               ...data,
-              updated: DateTime.now().toString(),
+              updated: getNowUTC(),
             };
             return updatedTask;
           }
@@ -94,7 +104,9 @@ const api = {
 
         await setState(state);
 
-        return updatedTask;
+        return {
+          data: updatedTask,
+        };
       });
     },
   },
@@ -103,7 +115,9 @@ const api = {
       return await request(async () => {
         const state = await getState();
 
-        return state.user;
+        return {
+          data: state.user,
+        };
       });
     },
     async signIn({ email, password }) {
@@ -117,9 +131,14 @@ const api = {
             name: 'Demo User',
           };
           await setState(state);
-          return state.user;
+
+          return {
+            data: state.user,
+          };
         } else {
-          return undefined;
+          return {
+            error: 'Sign in failed.',
+          };
         }
       });
     },
