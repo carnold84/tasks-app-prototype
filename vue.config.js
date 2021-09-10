@@ -6,7 +6,12 @@ module.exports = {
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
-    workboxPluginMode: 'GenerateSW',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      // swSrc is required in InjectManifest mode.
+      swSrc: 'dev/sw.js',
+      // ...other Workbox options...
+    },
   },
   publicPath:
     process.env.NODE_ENV === 'production' ? '/tasks-app-prototype/' : '/',
