@@ -8,11 +8,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tasks-app-prototype/css/chunk-vendors.e5419b3b.css"
   },
   {
-    "revision": "a91ebb31cddf6f4f81775263eecaa8b3",
+    "revision": "2074a65799fe6847c4b91e0ada1f064a",
     "url": "/tasks-app-prototype/favicon.png"
   },
   {
-    "revision": "5e3ae8264f99ec0d97b6c30fa960387b",
+    "revision": "aabda7f8cf285920cd650a16f27087dc",
     "url": "/tasks-app-prototype/img/logo.png"
   },
   {
