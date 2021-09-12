@@ -18,6 +18,12 @@
       ModalManager,
     },
     mounted() {
+      if (process.env.NODE_ENV === 'production') {
+        Notification.requestPermission(function(status) {
+          console.log('Notification permission status:', status);
+        });
+      }
+
       this.$store.dispatch('theme/init');
     },
   };

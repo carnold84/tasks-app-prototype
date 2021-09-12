@@ -1,6 +1,24 @@
 import Vue from 'vue';
+import { v4 as uuidv4 } from 'uuid';
 import api from '../api';
 import { addOneDay, formatRelative } from '../utils/dates';
+
+const displayNotification = ({ dateOfArrival, title }) => {
+  if (Notification.permission == 'granted') {
+    navigator.serviceWorker.getRegistration().then(function(reg) {
+      var options = {
+        body: title,
+        icon: 'img/logo.png',
+        vibrate: [100, 50, 100],
+        data: {
+          dateOfArrival: new Date(dateOfArrival).getTime(),
+          primaryKey: uuidv4(),
+        },
+      };
+      reg.showNotification('Hello world!', options);
+    });
+  }
+};
 
 export default {
   actions: {
@@ -66,6 +84,10 @@ export default {
           error: response.error,
         };
       } else {
+        displayNotification({
+          dateOfArrival: response.data.dueDate,
+          title: response.data.title,
+        });
         commit('add', response.data);
         return response.data;
       }

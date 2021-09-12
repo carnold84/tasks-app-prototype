@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "469941bbc1e56d18305a",
+    "revision": "e9985cfc907a3632470a",
     "url": "/tasks-app-prototype/css/app.cf109b05.css"
   },
   {
@@ -16,12 +16,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/tasks-app-prototype/img/logo.png"
   },
   {
-    "revision": "aba3d97482ca716e0c454b9251f783b4",
+    "revision": "1a220ad4045e39ce8d53841853e023a4",
     "url": "/tasks-app-prototype/index.html"
   },
   {
-    "revision": "469941bbc1e56d18305a",
-    "url": "/tasks-app-prototype/js/app.a801e18d.js"
+    "revision": "e9985cfc907a3632470a",
+    "url": "/tasks-app-prototype/js/app.6c6a4d01.js"
   },
   {
     "revision": "91348c5d762636d80264",
