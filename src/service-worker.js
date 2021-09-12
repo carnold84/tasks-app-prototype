@@ -1,10 +1,17 @@
-self.__precacheManifest = [].concat(self.__precacheManifest || []);
-workbox.precaching.suppressWarnings();
-workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+/* eslint-disable no-undef, no-restricted-globals */
 
-// install new service worker when ok, then reload page.
-self.addEventListener('message', (msg) => {
-  if (msg.data.action == 'skipWaiting') {
+// This is the code piece that GenerateSW mode can't provide for us.
+// This code listens for the user's confirmation to update the app.
+self.addEventListener('message', (event) => {
+  console.log(event);
+  if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
+
+workbox.clientsClaim();
+
+// The precaching code provided by Workbox.
+self.__precacheManifest = [].concat(self.__precacheManifest || []);
+workbox.precaching.suppressWarnings();
+workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
